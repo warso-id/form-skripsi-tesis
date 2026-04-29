@@ -215,13 +215,24 @@
     });
 
     // SUBMIT ke Apps Script
-    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyfecCM-VVhj06wJ_2MSf-TNeyoo7IiXTjXNNydirHfEJgICiVAbAEWua0_RQp7b3TP/exec"; // GANTI!
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwUecpzOSITTNyoAY96eVw2qpSObqaAdZLNez1_7W1vECkT96U_0QK97UGpjk52FqqR/exec"; // GANTI!
+    // Helper untuk konversi file ke Base64 (Solusi anti-corrupt untuk iOS/Android)
+    function getBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result.split(',')[1]); // Ambil base64 data-nya saja
+            reader.onerror = error => reject(error);
+        });
+    }
+
     async function submitForm(form, event) {
         event.preventDefault();
         let formData = new FormData(form);
         let nim = formData.get('nim');
         let type = formData.get('type');
         if(!validateNIM(nim, type)) { showToast(`❌ NIM tidak valid untuk ${type}`, "error"); return; }
+        
         let cover = formData.get('coverAbstrackFile');
         let full = formData.get('fullFile');
         if(!cover || cover.size===0) { showToast("Harap upload file persyaratan", "error"); return; }
@@ -237,15 +248,25 @@
         let { prefix, text } = getSemesterPrefix();
         formData.append('semester_prefix', prefix);
         formData.append('tahun_akademik', text);
-        showToast("⏳ Mengirim data...", "info");
         
         let submitBtn = form.querySelector('button[type="submit"]');
         let originalBtnText = submitBtn.innerHTML;
         submitBtn.disabled = true;
         submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Mengirim...';
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Memproses...';
+        showToast("⏳ Menyiapkan file... Jangan tutup halaman ini", "info");
 
         try {
+            // Konversi file ke format Base64 (Aman untuk dikirim via fetch di HP/Safari)
+            let coverB64 = await getBase64(cover);
+            let fullB64 = await getBase64(full);
+            
+            // Timpa field file di FormData dengan string Base64
+            formData.set('coverAbstrackFile', coverB64);
+            formData.set('fullFile', fullB64);
+            formData.append('cover_mime', cover.type);
+            formData.append('full_mime', full.type);
+
             let res = await fetch(APPS_SCRIPT_URL, { method: 'POST', body: formData });
             let result = await res.json();
             if(result.status==='success') { 
@@ -260,7 +281,7 @@
                 submitBtn.innerHTML = originalBtnText;
             }
         } catch(err) { 
-            showToast("⚠️ Gagal koneksi ke server. Periksa URL Apps Script.", "error"); 
+            showToast("⚠️ Gagal koneksi ke server. Pastikan internet stabil dan file tidak kebesaran.", "error"); 
             submitBtn.disabled = false;
             submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
             submitBtn.innerHTML = originalBtnText;
