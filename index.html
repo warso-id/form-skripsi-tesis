@@ -19,26 +19,17 @@
         .file-label:hover { background-color: #eef2ff; border-color: #3b82f6; }
         .preview-pdf { height: 180px; border-radius: 12px; border: 1px solid #ddd; background: #fef9e3; overflow: hidden; cursor: pointer; transition: all 0.2s; }
         .preview-pdf:hover { border-color: #3b82f6; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        /* Style untuk Logo */
-        .university-logo {
-            max-width: 100px; /* Mengatur lebar maksimal logo */
-            margin-bottom: 15px; /* Memberi jarak dengan teks di bawahnya */
-        }
+        .university-logo { max-width: 100px; margin-bottom: 15px; }
         @media (max-width: 640px) { 
             .preview-pdf { height: 140px; }
-            .university-logo {
-                max-width: 70px; /* Ukuran logo lebih kecil di HP */
-                margin-bottom: 10px;
-            }
+            .university-logo { max-width: 70px; margin-bottom: 10px; }
         }
     </style>
 </head>
 <body class="p-4 md:p-8 font-sans antialiased">
 
 <div class="max-w-5xl mx-auto">
-    <!-- Header dengan Logo -->
     <div class="text-center mb-8">
-        <!-- Menambahkan Logo di sini -->
         <img src="https://i.imgur.com/JkxRYd6.png" alt="Logo Universitas" class="university-logo mx-auto">
         <h1 class="text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-blue-900 to-blue-600 bg-clip-text text-transparent">📘 MAGISTER & SARJANA</h1>
         <p class="text-gray-600 mt-2">Sistem Pengumpulan Naskah Skripsi / Tesis <i class="fas fa-cloud-upload-alt text-blue-500"></i></p>
@@ -75,7 +66,6 @@
                     <span id="skripsiCoverFileName" class="text-xs font-medium block">Belum ada file</span>
                 </div>
                 <input type="file" id="skripsiCoverFile" name="coverAbstrackFile" accept=".pdf" class="hidden" required>
-                <!-- Preview -->
                 <div class="mt-3"><label class="text-sm font-medium">Preview PDF Persyaratan:</label><div id="previewCoverSkripsi" class="preview-pdf w-full bg-gray-100 flex items-center justify-center text-gray-400"><i class="fas fa-eye text-3xl"></i> <span class="ml-2">Preview akan tampil setelah pilih file</span></div></div>
             </div>
             <!-- File Full Skripsi -->
@@ -91,7 +81,7 @@
         </form>
     </div>
 
-    <!-- FORM TESIS (sama tapi dengan validasi NIM 03) -->
+    <!-- FORM TESIS -->
     <div id="formTesisContainer" class="card-glass p-5 md:p-8 hidden">
         <div class="border-l-4 border-purple-600 pl-4 mb-6"><h2 class="text-2xl font-bold text-gray-800"><i class="fas fa-scroll text-purple-600 mr-2"></i>Form Pengumpulan Tesis</h2><p class="text-gray-500 text-sm">* wajib diisi</p></div>
         <form id="tesisForm" enctype="multipart/form-data">
@@ -125,7 +115,6 @@
 </div>
 
 <script>
-    // semester & akademik
     function getSemesterPrefix() {
         const m = new Date().getMonth()+1;
         const y = new Date().getFullYear();
@@ -144,7 +133,6 @@
     }
     setTahunAkademik();
 
-    // Validasi NIM
     function validateNIM(nim, type) {
         if(nim.length<9) return false;
         let digits = nim.substring(4,6);
@@ -165,7 +153,6 @@
     bindNIMValidation('nimSkripsi','nimSkripsiError','skripsi');
     bindNIMValidation('nimTesis','nimTesisError','tesis');
 
-    // Preview PDF
     function setupPreview(fileInputId, previewDivId) {
         let input = document.getElementById(fileInputId);
         let previewDiv = document.getElementById(previewDivId);
@@ -184,6 +171,32 @@
     setupPreview('skripsiFullFile','previewFullSkripsi');
     setupPreview('tesisCoverFile','previewCoverTesis');
     setupPreview('tesisFullFile','previewFullTesis');
+
+    // Reset tampilan preview dan label file untuk form tertentu
+    function resetFormUI(formId) {
+        const form = document.getElementById(formId);
+        // Reset semua input file
+        const fileInputs = form.querySelectorAll('input[type="file"]');
+        fileInputs.forEach(input => {
+            input.value = ''; // kosongkan file
+            const spanId = input.id.replace('File','FileName');
+            const span = document.getElementById(spanId);
+            if(span) span.innerText = 'Belum ada file';
+            // reset preview
+            const previewDivId = input.id.replace('File','Preview') + (input.id.includes('Cover') ? 'Cover' : 'Full');
+            let previewDiv = null;
+            if(input.id.includes('Cover')) {
+                if(formId === 'skripsiForm') previewDiv = document.getElementById('previewCoverSkripsi');
+                else previewDiv = document.getElementById('previewCoverTesis');
+            } else {
+                if(formId === 'skripsiForm') previewDiv = document.getElementById('previewFullSkripsi');
+                else previewDiv = document.getElementById('previewFullTesis');
+            }
+            if(previewDiv) {
+                previewDiv.innerHTML = `<div class="flex items-center justify-center w-full h-full text-gray-400"><i class="fas fa-eye text-3xl"></i><span class="ml-2">Preview akan tampil setelah pilih file</span></div>`;
+            }
+        });
+    }
 
     // File name display
     ['skripsiCoverFile','skripsiFullFile','tesisCoverFile','tesisFullFile'].forEach(id => {
@@ -210,7 +223,7 @@
     });
 
     // SUBMIT ke Apps Script
-    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwjQ6xu1Styj9StO_yLAiQB-9bB39tADC_g5YT4xpikIm5CrpjF9UmOVjvMCi3_xYOJ/exec"; // GANTI!
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwjQ6xu1Styj9StO_yLAiQB-9bB39tADC_g5YT4xpikIm5CrpjF9UmOVjvMCi3_xYOJ/exec";
     async function submitForm(form, event) {
         event.preventDefault();
         let formData = new FormData(form);
@@ -228,9 +241,25 @@
         try {
             let res = await fetch(APPS_SCRIPT_URL, { method: 'POST', body: formData });
             let result = await res.json();
-            if(result.status==='success') { showToast(`✅ ${type.toUpperCase()} berhasil disimpan!`, "success"); form.reset(); location.reload(); }
-            else showToast(`❌ Gagal: ${result.message}`, "error");
-        } catch(err) { showToast("⚠️ Gagal koneksi ke server. Periksa URL Apps Script.", "error"); }
+            if(result.status==='success') {
+                showToast(`✅ ${type.toUpperCase()} berhasil disimpan!`, "success");
+                // Reset form dan UI tanpa reload
+                form.reset();
+                resetFormUI(form.id);
+                setTahunAkademik(); // pastikan tahun akademik tetap terisi
+                // Reset error NIM
+                const nimInput = form.querySelector('input[name="nim"]');
+                if(nimInput) {
+                    const errDiv = document.getElementById(nimInput.id + 'Error');
+                    if(errDiv) errDiv.classList.add('hidden');
+                }
+            } else {
+                showToast(`❌ Gagal: ${result.message}`, "error");
+            }
+        } catch(err) {
+            console.error(err);
+            showToast("⚠️ Gagal koneksi ke server. Periksa URL Apps Script.", "error");
+        }
     }
     function showToast(msg, type) {
         let toast = document.getElementById('toastMsg');
