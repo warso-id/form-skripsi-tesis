@@ -1,1132 +1,1556 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>SIM Akademik | Skripsi & Tesis</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>SIM Akademik | Skripsi & Tesis</title>
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <!-- Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <style>
-    /* ── Reset & Base ─────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    <style>
+        /* ── Reset & Base ─────────────────────────────────────── */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    :root {
-      --blue-dark  : #0f2d6e;
-      --blue-mid   : #1a4db8;
-      --blue-light : #3b82f6;
-      --blue-soft  : #eff6ff;
-      --purple-dark: #4c1d95;
-      --purple-mid : #7c3aed;
-      --purple-soft: #f5f3ff;
-      --gold       : #f59e0b;
-      --success    : #10b981;
-      --error      : #ef4444;
-      --warning    : #f59e0b;
-      --text-dark  : #0f172a;
-      --text-mid   : #334155;
-      --text-light : #64748b;
-      --border     : #e2e8f0;
-      --bg-page    : #f0f5ff;
-      --white      : #ffffff;
-      --radius-xl  : 1.25rem;
-      --radius-lg  : 1rem;
-      --radius-md  : 0.75rem;
-      --radius-sm  : 0.5rem;
-      --shadow-sm  : 0 1px 3px rgba(0,0,0,.08);
-      --shadow-md  : 0 4px 16px rgba(15,45,110,.10);
-      --shadow-lg  : 0 12px 40px rgba(15,45,110,.14);
-      --transition : 0.25s cubic-bezier(.4,0,.2,1);
-    }
+        :root {
+            --blue-dark: #0f2d6e;
+            --blue-mid: #1a4db8;
+            --blue-light: #3b82f6;
+            --blue-soft: #eff6ff;
+            --purple-dark: #4c1d95;
+            --purple-mid: #7c3aed;
+            --purple-soft: #f5f3ff;
+            --gold: #f59e0b;
+            --success: #10b981;
+            --error: #ef4444;
+            --warning: #f59e0b;
+            --text-dark: #0f172a;
+            --text-mid: #334155;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --bg-page: #f0f5ff;
+            --white: #ffffff;
+            --radius-xl: 1.25rem;
+            --radius-lg: 1rem;
+            --radius-md: 0.75rem;
+            --radius-sm: 0.5rem;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, .08);
+            --shadow-md: 0 4px 16px rgba(15, 45, 110, .10);
+            --shadow-lg: 0 12px 40px rgba(15, 45, 110, .14);
+            --transition: 0.25s cubic-bezier(.4, 0, .2, 1);
+        }
 
-    html { scroll-behavior: smooth; }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background: var(--bg-page);
-      min-height: 100vh;
-      color: var(--text-dark);
-      -webkit-tap-highlight-color: transparent;
-    }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-page);
+            min-height: 100vh;
+            color: var(--text-dark);
+            -webkit-tap-highlight-color: transparent;
+        }
 
-    /* ── Page background mesh ─────────────────────────────── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 70% 40% at 20% 0%,   rgba(26,77,184,.12) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 30% at 80% 100%,  rgba(124,58,237,.10) 0%, transparent 60%);
-      pointer-events: none;
-      z-index: 0;
-    }
+        /* ── Page background mesh ─────────────────────────────── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 70% 40% at 20% 0%, rgba(26, 77, 184, .12) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 30% at 80% 100%, rgba(124, 58, 237, .10) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
 
-    /* ── Wrapper ──────────────────────────────────────────── */
-    .page-wrap {
-      position: relative;
-      z-index: 1;
-      max-width: 740px;
-      margin: 0 auto;
-      padding: 1.5rem 1rem 4rem;
-    }
+        /* ── Wrapper ──────────────────────────────────────────── */
+        .page-wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 740px;
+            margin: 0 auto;
+            padding: 1.5rem 1rem 4rem;
+        }
 
-    /* ── Header ───────────────────────────────────────────── */
-    .header {
-      text-align: center;
-      margin-bottom: 2rem;
-      animation: fadeDown .55s ease both;
-    }
-    .header-logo {
-      width: 80px;
-      height: 80px;
-      object-fit: contain;
-      margin-bottom: .75rem;
-      filter: drop-shadow(0 2px 6px rgba(0,0,0,.15));
-    }
-    .header h1 {
-      font-size: clamp(1.5rem, 5vw, 2.2rem);
-      font-weight: 800;
-      background: linear-gradient(135deg, var(--blue-dark), var(--blue-light));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1.2;
-    }
-    .header p { color: var(--text-light); margin-top: .35rem; font-size: .9rem; }
+        /* ── Header ───────────────────────────────────────────── */
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: fadeDown .55s ease both;
+        }
 
-    /* ── Tab switcher ─────────────────────────────────────── */
-    .tab-group {
-      display: flex;
-      gap: .5rem;
-      justify-content: center;
-      margin-bottom: 1.75rem;
-      animation: fadeDown .55s .1s ease both;
-    }
-    .tab-btn {
-      display: flex; align-items: center; gap: .5rem;
-      padding: .65rem 1.75rem;
-      border: none; cursor: pointer;
-      border-radius: 999px;
-      font-family: inherit; font-size: .95rem; font-weight: 700;
-      transition: var(--transition);
-      outline: none;
-    }
-    .tab-btn.active-skripsi {
-      background: linear-gradient(120deg, var(--blue-dark), var(--blue-mid));
-      color: var(--white);
-      box-shadow: 0 6px 20px rgba(26,77,184,.35);
-    }
-    .tab-btn.active-tesis {
-      background: linear-gradient(120deg, var(--purple-dark), var(--purple-mid));
-      color: var(--white);
-      box-shadow: 0 6px 20px rgba(124,58,237,.35);
-    }
-    .tab-btn.inactive {
-      background: var(--white);
-      color: var(--text-mid);
-      box-shadow: var(--shadow-sm);
-      border: 1px solid var(--border);
-    }
-    .tab-btn.inactive:hover { background: #f8faff; transform: translateY(-1px); }
+        .header-logo {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: .75rem;
+            filter: drop-shadow(0 2px 6px rgba(0, 0, 0, .15));
+        }
 
-    /* ── Card ─────────────────────────────────────────────── */
-    .card {
-      background: var(--white);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow-lg);
-      padding: 1.75rem 1.5rem;
-      animation: fadeUp .5s .15s ease both;
-      overflow: hidden;
-    }
-    @media (min-width: 640px) { .card { padding: 2.25rem 2rem; } }
+        .header h1 {
+            font-size: clamp(1.5rem, 5vw, 2.2rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--blue-dark), var(--blue-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
 
-    /* ── Card header ──────────────────────────────────────── */
-    .card-header {
-      display: flex; align-items: center; gap: .75rem;
-      margin-bottom: 1.5rem;
-    }
-    .card-header-icon {
-      width: 44px; height: 44px; border-radius: var(--radius-md);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.1rem; color: var(--white); flex-shrink: 0;
-    }
-    .icon-blue   { background: linear-gradient(135deg, var(--blue-dark), var(--blue-light)); }
-    .icon-purple { background: linear-gradient(135deg, var(--purple-dark), var(--purple-mid)); }
-    .card-header h2 { font-size: 1.25rem; font-weight: 800; color: var(--text-dark); }
-    .card-header p  { font-size: .8rem; color: var(--text-light); }
+        .header p {
+            color: var(--text-light);
+            margin-top: .35rem;
+            font-size: .9rem;
+        }
 
-    /* ── Progress bar ─────────────────────────────────────── */
-    .progress-wrap {
-      margin-bottom: 2rem;
-    }
-    .progress-steps {
-      display: flex; align-items: center;
-      gap: 0; margin-bottom: .75rem;
-    }
-    .step-circle {
-      width: 32px; height: 32px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: .75rem; font-weight: 700;
-      border: 2px solid var(--border);
-      background: var(--white); color: var(--text-light);
-      transition: var(--transition); flex-shrink: 0; position: relative; z-index: 1;
-    }
-    .step-circle.done  { background: var(--success); border-color: var(--success); color: var(--white); }
-    .step-line {
-      flex: 1; height: 2px; background: var(--border); transition: var(--transition);
-    }
-    .step-line.done { background: var(--success); }
-    .step-labels {
-      display: flex; justify-content: space-between;
-    }
-    .step-label {
-      font-size: .72rem; font-weight: 600; color: var(--text-light);
-      transition: var(--transition); text-align: center; width: 32px;
-    }
-    .step-label.active { color: var(--blue-mid); }
-    .step-label.done-lbl { color: var(--success); }
+        /* ── Tab switcher ─────────────────────────────────────── */
+        .tab-group {
+            display: flex;
+            gap: .5rem;
+            justify-content: center;
+            margin-bottom: 1.75rem;
+            animation: fadeDown .55s .1s ease both;
+        }
 
-    /* Active step circle – tinted by type */
-    .type-skripsi .step-circle.active {
-      border-color: var(--blue-mid); background: var(--blue-soft); color: var(--blue-dark);
-    }
-    .type-tesis .step-circle.active {
-      border-color: var(--purple-mid); background: var(--purple-soft); color: var(--purple-dark);
-    }
+        .tab-btn {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .65rem 1.75rem;
+            border: none;
+            cursor: pointer;
+            border-radius: 999px;
+            font-family: inherit;
+            font-size: .95rem;
+            font-weight: 700;
+            transition: var(--transition);
+            outline: none;
+        }
 
-    /* ── Step content panels ──────────────────────────────── */
-    .step-panel { display: none; }
-    .step-panel.active {
-      display: block;
-      animation: slideInRight .3s cubic-bezier(.4,0,.2,1) both;
-    }
-    .step-panel.slide-left {
-      animation: slideInLeft .3s cubic-bezier(.4,0,.2,1) both;
-    }
+        .tab-btn.active-skripsi {
+            background: linear-gradient(120deg, var(--blue-dark), var(--blue-mid));
+            color: var(--white);
+            box-shadow: 0 6px 20px rgba(26, 77, 184, .35);
+        }
 
-    /* ── Grid layout ──────────────────────────────────────── */
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-    @media (min-width: 560px) {
-      .grid-2 { grid-template-columns: 1fr 1fr; }
-    }
-    .col-span-2 { grid-column: 1 / -1; }
+        .tab-btn.active-tesis {
+            background: linear-gradient(120deg, var(--purple-dark), var(--purple-mid));
+            color: var(--white);
+            box-shadow: 0 6px 20px rgba(124, 58, 237, .35);
+        }
 
-    /* ── Form fields ──────────────────────────────────────── */
-    .field { display: flex; flex-direction: column; gap: .35rem; }
-    .field label {
-      font-size: .85rem; font-weight: 700; color: var(--text-mid);
-      display: flex; align-items: center; gap: .3rem;
-    }
-    .field label .req { color: var(--error); }
-    .field label .opt {
-      font-size: .72rem; font-weight: 500; color: var(--text-light);
-      background: #f1f5f9; border-radius: 999px; padding: .1rem .45rem;
-    }
+        .tab-btn.inactive {
+            background: var(--white);
+            color: var(--text-mid);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+        }
 
-    .input-wrap { position: relative; }
-    .input-wrap i.input-icon {
-      position: absolute; left: .9rem; top: 50%; transform: translateY(-50%);
-      color: var(--text-light); font-size: .85rem; pointer-events: none;
-      transition: color var(--transition);
-    }
+        .tab-btn.inactive:hover {
+            background: #f8faff;
+            transform: translateY(-1px);
+        }
 
-    input[type="text"],
-    input[type="tel"],
-    input[type="email"],
-    select,
-    textarea {
-      width: 100%;
-      padding: .75rem .9rem .75rem 2.4rem;
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius-md);
-      font-family: inherit; font-size: .92rem;
-      color: var(--text-dark);
-      background: #fafcff;
-      transition: var(--transition);
-      outline: none;
-      -webkit-appearance: none; appearance: none;
-    }
-    input.no-icon, select.no-icon { padding-left: .9rem; }
-    input[readonly] { background: #f1f5f9; cursor: default; color: var(--text-light); }
+        /* ── Card ─────────────────────────────────────────────── */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            padding: 1.75rem 1.5rem;
+            animation: fadeUp .5s .15s ease both;
+            overflow: hidden;
+        }
 
-    input:focus, select:focus {
-      border-color: var(--blue-mid);
-      box-shadow: 0 0 0 3px rgba(59,130,246,.15);
-      background: var(--white);
-    }
-    input:focus + .input-icon { color: var(--blue-mid); }
+        @media (min-width: 640px) {
+            .card {
+                padding: 2.25rem 2rem;
+            }
+        }
 
-    .type-tesis input:focus, .type-tesis select:focus {
-      border-color: var(--purple-mid);
-      box-shadow: 0 0 0 3px rgba(124,58,237,.15);
-    }
+        /* ── Card header ──────────────────────────────────────── */
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            margin-bottom: 1.5rem;
+        }
 
-    /* placeholder color */
-    input::placeholder { color: #b0bec5; font-size: .88rem; }
+        .card-header-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: var(--white);
+            flex-shrink: 0;
+        }
 
-    /* ── NIM error ────────────────────────────────────────── */
-    .nim-error {
-      font-size: .78rem; color: var(--error);
-      display: flex; align-items: center; gap: .3rem;
-      min-height: 1rem;
-      animation: fadeDown .2s ease;
-    }
-    .nim-ok {
-      font-size: .78rem; color: var(--success);
-      display: flex; align-items: center; gap: .3rem;
-      animation: fadeDown .2s ease;
-    }
+        .icon-blue {
+            background: linear-gradient(135deg, var(--blue-dark), var(--blue-light));
+        }
 
-    /* ── Section divider ──────────────────────────────────── */
-    .section-divider {
-      display: flex; align-items: center; gap: .75rem;
-      margin: 1.5rem 0 1.25rem;
-      color: var(--text-light); font-size: .8rem; font-weight: 600;
-    }
-    .section-divider::before, .section-divider::after {
-      content: ''; flex: 1; height: 1px; background: var(--border);
-    }
+        .icon-purple {
+            background: linear-gradient(135deg, var(--purple-dark), var(--purple-mid));
+        }
 
-    /* ── File upload area ─────────────────────────────────── */
-    .file-zone {
-      border: 2px dashed var(--border);
-      border-radius: var(--radius-lg);
-      padding: 1.25rem;
-      text-align: center;
-      cursor: pointer;
-      transition: var(--transition);
-      background: #fafcff;
-      position: relative;
-      overflow: hidden;
-    }
-    .file-zone:hover { border-color: var(--blue-light); background: var(--blue-soft); }
-    .type-tesis .file-zone:hover { border-color: var(--purple-mid); background: var(--purple-soft); }
-    .file-zone.has-file { border-style: solid; border-color: var(--success); background: #f0fdf4; }
-    .file-zone input { display: none; }
-    .file-zone .fz-icon { font-size: 1.75rem; margin-bottom: .4rem; }
-    .file-zone .fz-title { font-size: .9rem; font-weight: 700; color: var(--text-mid); }
-    .file-zone .fz-sub   { font-size: .78rem; color: var(--text-light); margin-top: .15rem; }
-    .file-zone .fz-name  {
-      display: inline-block; margin-top: .5rem;
-      font-size: .78rem; font-weight: 700; color: var(--success);
-      background: #dcfce7; border-radius: 999px; padding: .2rem .75rem;
-      max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-    }
+        .card-header h2 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text-dark);
+        }
 
-    /* ── PDF Preview ──────────────────────────────────────── */
-    .preview-box {
-      margin-top: .75rem;
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius-md);
-      height: 180px;
-      overflow: hidden;
-      background: #f8fafc;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--text-light); font-size: .85rem; gap: .5rem;
-      transition: var(--transition);
-    }
-    .preview-box iframe { width: 100%; height: 100%; border: none; display: block; }
-    @media (max-width: 480px) { .preview-box { height: 140px; } }
+        .card-header p {
+            font-size: .8rem;
+            color: var(--text-light);
+        }
 
-    /* ── Navigation buttons ───────────────────────────────── */
-    .nav-btns {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-top: 1.75rem; gap: .75rem;
-    }
-    .btn {
-      display: inline-flex; align-items: center; gap: .5rem;
-      padding: .75rem 1.5rem; border: none; border-radius: var(--radius-md);
-      font-family: inherit; font-size: .9rem; font-weight: 700;
-      cursor: pointer; transition: var(--transition); outline: none;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .btn:active { transform: scale(.97); }
-    .btn-ghost {
-      background: transparent; color: var(--text-light);
-      border: 1.5px solid var(--border);
-    }
-    .btn-ghost:hover { background: #f1f5f9; }
-    .btn-primary-blue {
-      background: linear-gradient(120deg, var(--blue-dark), var(--blue-mid));
-      color: var(--white); box-shadow: 0 4px 14px rgba(26,77,184,.3);
-    }
-    .btn-primary-blue:hover { box-shadow: 0 8px 22px rgba(26,77,184,.4); transform: translateY(-1px); }
-    .btn-primary-purple {
-      background: linear-gradient(120deg, var(--purple-dark), var(--purple-mid));
-      color: var(--white); box-shadow: 0 4px 14px rgba(124,58,237,.3);
-    }
-    .btn-primary-purple:hover { box-shadow: 0 8px 22px rgba(124,58,237,.4); transform: translateY(-1px); }
-    .btn-success {
-      background: linear-gradient(120deg, #059669, var(--success));
-      color: var(--white); box-shadow: 0 4px 14px rgba(16,185,129,.3);
-    }
-    .btn-success:hover { transform: translateY(-1px); }
-    .btn:disabled {
-      opacity: .55; cursor: not-allowed; transform: none !important;
-      box-shadow: none !important;
-    }
+        /* ── Progress bar ─────────────────────────────────────── */
+        .progress-wrap {
+            margin-bottom: 2rem;
+        }
 
-    /* ── Summary review (step 3 bottom) ──────────────────── */
-    .summary-box {
-      background: #f8faff; border: 1px solid var(--border);
-      border-radius: var(--radius-md); padding: 1rem 1.25rem;
-      margin-top: 1rem; font-size: .85rem;
-    }
-    .summary-box h4 { font-weight: 800; color: var(--text-mid); margin-bottom: .5rem; font-size: .88rem; }
-    .summary-row { display: flex; gap: .5rem; margin-bottom: .3rem; align-items: baseline; }
-    .summary-row span:first-child { width: 140px; flex-shrink: 0; color: var(--text-light); font-size: .8rem; }
-    .summary-row span:last-child  { font-weight: 600; color: var(--text-dark); }
+        .progress-steps {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            margin-bottom: .75rem;
+        }
 
-    /* ── Toast ────────────────────────────────────────────── */
-    #toast {
-      position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%) translateY(120%);
-      z-index: 9999; max-width: 92vw; min-width: 240px;
-      display: flex; align-items: center; gap: .65rem;
-      padding: .85rem 1.25rem;
-      border-radius: 999px; font-size: .88rem; font-weight: 600;
-      box-shadow: 0 8px 30px rgba(0,0,0,.2);
-      transition: transform .35s cubic-bezier(.4,0,.2,1), opacity .35s ease;
-      opacity: 0; pointer-events: none;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
-    #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
-    #toast.t-success { background: #064e3b; color: #a7f3d0; }
-    #toast.t-error   { background: #7f1d1d; color: #fca5a5; }
-    #toast.t-info    { background: #1e3a8a; color: #bfdbfe; }
+        .step-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .75rem;
+            font-weight: 700;
+            border: 2px solid var(--border);
+            background: var(--white);
+            color: var(--text-light);
+            transition: var(--transition);
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+        }
 
-    /* ── Loading overlay ──────────────────────────────────── */
-    #loadingOverlay {
-      display: none; position: fixed; inset: 0; z-index: 9998;
-      background: rgba(15,23,42,.55); backdrop-filter: blur(3px);
-      align-items: center; justify-content: center; flex-direction: column; gap: 1rem;
-    }
-    #loadingOverlay.show { display: flex; }
-    .spinner {
-      width: 52px; height: 52px; border-radius: 50%;
-      border: 4px solid rgba(255,255,255,.2);
-      border-top-color: var(--white);
-      animation: spin .8s linear infinite;
-    }
-    #loadingOverlay p {
-      color: var(--white); font-weight: 700; font-size: .95rem; text-align: center;
-    }
-    #loadingOverlay small { color: rgba(255,255,255,.6); font-size: .78rem; }
+        .step-circle.done {
+            background: var(--success);
+            border-color: var(--success);
+            color: var(--white);
+        }
 
-    /* ── Animations ───────────────────────────────────────── */
-    @keyframes fadeDown  { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: none; } }
-    @keyframes fadeUp    { from { opacity: 0; transform: translateY(16px);  } to { opacity: 1; transform: none; } }
-    @keyframes slideInRight { from { opacity: 0; transform: translateX(28px); } to { opacity: 1; transform: none; } }
-    @keyframes slideInLeft  { from { opacity: 0; transform: translateX(-28px);} to { opacity: 1; transform: none; } }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.45} }
+        .step-line {
+            flex: 1;
+            height: 2px;
+            background: var(--border);
+            transition: var(--transition);
+        }
 
-    /* ── Utility ──────────────────────────────────────────── */
-    .hidden { display: none !important; }
-    .text-xs { font-size: .78rem; }
-    .text-muted { color: var(--text-light); }
-    select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'%3E%3Cpath fill='%2394a3b8' d='m7 10 5 5 5-5z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right .75rem center; padding-right: 2.5rem; }
-  </style>
+        .step-line.done {
+            background: var(--success);
+        }
+
+        .step-labels {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .step-label {
+            font-size: .72rem;
+            font-weight: 600;
+            color: var(--text-light);
+            transition: var(--transition);
+            text-align: center;
+            width: 32px;
+        }
+
+        .step-label.active {
+            color: var(--blue-mid);
+        }
+
+        .step-label.done-lbl {
+            color: var(--success);
+        }
+
+        /* Active step circle – tinted by type */
+        .type-skripsi .step-circle.active {
+            border-color: var(--blue-mid);
+            background: var(--blue-soft);
+            color: var(--blue-dark);
+        }
+
+        .type-tesis .step-circle.active {
+            border-color: var(--purple-mid);
+            background: var(--purple-soft);
+            color: var(--purple-dark);
+        }
+
+        /* ── Step content panels ──────────────────────────────── */
+        .step-panel {
+            display: none;
+        }
+
+        .step-panel.active {
+            display: block;
+            animation: slideInRight .3s cubic-bezier(.4, 0, .2, 1) both;
+        }
+
+        .step-panel.slide-left {
+            animation: slideInLeft .3s cubic-bezier(.4, 0, .2, 1) both;
+        }
+
+        /* ── Grid layout ──────────────────────────────────────── */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        @media (min-width: 560px) {
+            .grid-2 {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .col-span-2 {
+            grid-column: 1 / -1;
+        }
+
+        /* ── Form fields ──────────────────────────────────────── */
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: .35rem;
+        }
+
+        .field label {
+            font-size: .85rem;
+            font-weight: 700;
+            color: var(--text-mid);
+            display: flex;
+            align-items: center;
+            gap: .3rem;
+        }
+
+        .field label .req {
+            color: var(--error);
+        }
+
+        .field label .opt {
+            font-size: .72rem;
+            font-weight: 500;
+            color: var(--text-light);
+            background: #f1f5f9;
+            border-radius: 999px;
+            padding: .1rem .45rem;
+        }
+
+        .input-wrap {
+            position: relative;
+        }
+
+        .input-wrap i.input-icon {
+            position: absolute;
+            left: .9rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+            font-size: .85rem;
+            pointer-events: none;
+            transition: color var(--transition);
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="email"],
+        select,
+        textarea {
+            width: 100%;
+            padding: .75rem .9rem .75rem 2.4rem;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-md);
+            font-family: inherit;
+            font-size: .92rem;
+            color: var(--text-dark);
+            background: #fafcff;
+            transition: var(--transition);
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        input.no-icon,
+        select.no-icon {
+            padding-left: .9rem;
+        }
+
+        input[readonly] {
+            background: #f1f5f9;
+            cursor: default;
+            color: var(--text-light);
+        }
+
+        input:focus,
+        select:focus {
+            border-color: var(--blue-mid);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, .15);
+            background: var(--white);
+        }
+
+        input:focus+.input-icon {
+            color: var(--blue-mid);
+        }
+
+        .type-tesis input:focus,
+        .type-tesis select:focus {
+            border-color: var(--purple-mid);
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, .15);
+        }
+
+        /* placeholder color */
+        input::placeholder {
+            color: #b0bec5;
+            font-size: .88rem;
+        }
+
+        /* ── NIM error ────────────────────────────────────────── */
+        .nim-error {
+            font-size: .78rem;
+            color: var(--error);
+            display: flex;
+            align-items: center;
+            gap: .3rem;
+            min-height: 1rem;
+            animation: fadeDown .2s ease;
+        }
+
+        .nim-ok {
+            font-size: .78rem;
+            color: var(--success);
+            display: flex;
+            align-items: center;
+            gap: .3rem;
+            animation: fadeDown .2s ease;
+        }
+
+        /* ── Section divider ──────────────────────────────────── */
+        .section-divider {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            margin: 1.5rem 0 1.25rem;
+            color: var(--text-light);
+            font-size: .8rem;
+            font-weight: 600;
+        }
+
+        .section-divider::before,
+        .section-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* ── File upload area ─────────────────────────────────── */
+        .file-zone {
+            border: 2px dashed var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background: #fafcff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .file-zone:hover {
+            border-color: var(--blue-light);
+            background: var(--blue-soft);
+        }
+
+        .type-tesis .file-zone:hover {
+            border-color: var(--purple-mid);
+            background: var(--purple-soft);
+        }
+
+        .file-zone.has-file {
+            border-style: solid;
+            border-color: var(--success);
+            background: #f0fdf4;
+        }
+
+        .file-zone input {
+            display: none;
+        }
+
+        .file-zone .fz-icon {
+            font-size: 1.75rem;
+            margin-bottom: .4rem;
+        }
+
+        .file-zone .fz-title {
+            font-size: .9rem;
+            font-weight: 700;
+            color: var(--text-mid);
+        }
+
+        .file-zone .fz-sub {
+            font-size: .78rem;
+            color: var(--text-light);
+            margin-top: .15rem;
+        }
+
+        .file-zone .fz-name {
+            display: inline-block;
+            margin-top: .5rem;
+            font-size: .78rem;
+            font-weight: 700;
+            color: var(--success);
+            background: #dcfce7;
+            border-radius: 999px;
+            padding: .2rem .75rem;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* ── PDF Preview ──────────────────────────────────────── */
+        .preview-box {
+            margin-top: .75rem;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-md);
+            height: 180px;
+            overflow: hidden;
+            background: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-size: .85rem;
+            gap: .5rem;
+            transition: var(--transition);
+        }
+
+        .preview-box iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        @media (max-width: 480px) {
+            .preview-box {
+                height: 140px;
+            }
+        }
+
+        /* ── Navigation buttons ───────────────────────────────── */
+        .nav-btns {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.75rem;
+            gap: .75rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .75rem 1.5rem;
+            border: none;
+            border-radius: var(--radius-md);
+            font-family: inherit;
+            font-size: .9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .btn:active {
+            transform: scale(.97);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-light);
+            border: 1.5px solid var(--border);
+        }
+
+        .btn-ghost:hover {
+            background: #f1f5f9;
+        }
+
+        .btn-primary-blue {
+            background: linear-gradient(120deg, var(--blue-dark), var(--blue-mid));
+            color: var(--white);
+            box-shadow: 0 4px 14px rgba(26, 77, 184, .3);
+        }
+
+        .btn-primary-blue:hover {
+            box-shadow: 0 8px 22px rgba(26, 77, 184, .4);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary-purple {
+            background: linear-gradient(120deg, var(--purple-dark), var(--purple-mid));
+            color: var(--white);
+            box-shadow: 0 4px 14px rgba(124, 58, 237, .3);
+        }
+
+        .btn-primary-purple:hover {
+            box-shadow: 0 8px 22px rgba(124, 58, 237, .4);
+            transform: translateY(-1px);
+        }
+
+        .btn-success {
+            background: linear-gradient(120deg, #059669, var(--success));
+            color: var(--white);
+            box-shadow: 0 4px 14px rgba(16, 185, 129, .3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-1px);
+        }
+
+        .btn:disabled {
+            opacity: .55;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        /* ── Summary review (step 3 bottom) ──────────────────── */
+        .summary-box {
+            background: #f8faff;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 1rem 1.25rem;
+            margin-top: 1rem;
+            font-size: .85rem;
+        }
+
+        .summary-box h4 {
+            font-weight: 800;
+            color: var(--text-mid);
+            margin-bottom: .5rem;
+            font-size: .88rem;
+        }
+
+        .summary-row {
+            display: flex;
+            gap: .5rem;
+            margin-bottom: .3rem;
+            align-items: baseline;
+        }
+
+        .summary-row span:first-child {
+            width: 140px;
+            flex-shrink: 0;
+            color: var(--text-light);
+            font-size: .8rem;
+        }
+
+        .summary-row span:last-child {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        /* ── Toast ────────────────────────────────────────────── */
+        #toast {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(120%);
+            z-index: 9999;
+            max-width: 92vw;
+            min-width: 240px;
+            display: flex;
+            align-items: center;
+            gap: .65rem;
+            padding: .85rem 1.25rem;
+            border-radius: 999px;
+            font-size: .88rem;
+            font-weight: 600;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, .2);
+            transition: transform .35s cubic-bezier(.4, 0, .2, 1), opacity .35s ease;
+            opacity: 0;
+            pointer-events: none;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        #toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        #toast.t-success {
+            background: #064e3b;
+            color: #a7f3d0;
+        }
+
+        #toast.t-error {
+            background: #7f1d1d;
+            color: #fca5a5;
+        }
+
+        #toast.t-info {
+            background: #1e3a8a;
+            color: #bfdbfe;
+        }
+
+        /* ── Loading overlay ──────────────────────────────────── */
+        #loadingOverlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9998;
+            background: rgba(15, 23, 42, .55);
+            backdrop-filter: blur(3px);
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        #loadingOverlay.show {
+            display: flex;
+        }
+
+        .spinner {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            border: 4px solid rgba(255, 255, 255, .2);
+            border-top-color: var(--white);
+            animation: spin .8s linear infinite;
+        }
+
+        #loadingOverlay p {
+            color: var(--white);
+            font-weight: 700;
+            font-size: .95rem;
+            text-align: center;
+        }
+
+        #loadingOverlay small {
+            color: rgba(255, 255, 255, .6);
+            font-size: .78rem;
+        }
+
+        /* ── Animations ───────────────────────────────────────── */
+        @keyframes fadeDown {
+            from {
+                opacity: 0;
+                transform: translateY(-14px);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(28px);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-28px);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: .45
+            }
+        }
+
+        /* ── Utility ──────────────────────────────────────────── */
+        .hidden {
+            display: none !important;
+        }
+
+        .text-xs {
+            font-size: .78rem;
+        }
+
+        .text-muted {
+            color: var(--text-light);
+        }
+
+        select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'%3E%3Cpath fill='%2394a3b8' d='m7 10 5 5 5-5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right .75rem center;
+            padding-right: 2.5rem;
+        }
+    </style>
 </head>
+
 <body>
 
-<!-- ══ Loading overlay ════════════════════════════════════════ -->
-<div id="loadingOverlay">
-  <div class="spinner"></div>
-  <p id="loadingMsg">Mengunggah file...</p>
-  <small id="loadingDetail">Mohon tunggu, jangan tutup halaman ini</small>
-</div>
-
-<!-- ══ Toast ══════════════════════════════════════════════════ -->
-<div id="toast"></div>
-
-<!-- ══ Page wrapper ═══════════════════════════════════════════ -->
-<div class="page-wrap">
-
-  <!-- Header -->
-  <div class="header">
-    <img src="https://i.imgur.com/JkxRYd6.png" alt="Logo" class="header-logo"
-         onerror="this.style.display='none'">
-    <h1>📘 MAGISTER &amp; SARJANA</h1>
-    <p>Sistem Pengumpulan Naskah Skripsi / Tesis &nbsp;<i class="fas fa-cloud-upload-alt" style="color:var(--blue-light)"></i></p>
-  </div>
-
-  <!-- Tab switcher -->
-  <div class="tab-group">
-    <button id="tabSkripsi" class="tab-btn active-skripsi" onclick="switchType('skripsi')">
-      <i class="fas fa-book-open"></i> Skripsi (S1)
-    </button>
-    <button id="tabTesis" class="tab-btn inactive" onclick="switchType('tesis')">
-      <i class="fas fa-graduation-cap"></i> Tesis (S2)
-    </button>
-  </div>
-
-  <!-- Card -->
-  <div class="card" id="mainCard">
-
-    <!-- Card header -->
-    <div class="card-header">
-      <div class="card-header-icon icon-blue" id="cardIcon">
-        <i class="fas fa-file-alt"></i>
-      </div>
-      <div>
-        <h2 id="cardTitle">Form Pengumpulan Skripsi</h2>
-        <p>Isi data dengan lengkap dan benar &nbsp;·&nbsp; <span style="color:var(--error)">*</span> wajib diisi</p>
-      </div>
+    <!-- ══ Loading overlay ════════════════════════════════════════ -->
+    <div id="loadingOverlay">
+        <div class="spinner"></div>
+        <p id="loadingMsg">Mengunggah file...</p>
+        <small id="loadingDetail">Mohon tunggu, jangan tutup halaman ini</small>
     </div>
 
-    <!-- ── Progress bar ──────────────────────────────────── -->
-    <div class="progress-wrap">
-      <div class="progress-steps" id="progressSteps">
-        <div class="step-circle active" id="sc1">1</div>
-        <div class="step-line"         id="sl1"></div>
-        <div class="step-circle"       id="sc2">2</div>
-        <div class="step-line"         id="sl2"></div>
-        <div class="step-circle"       id="sc3">3</div>
-      </div>
-      <div class="step-labels">
-        <span class="step-label active" id="lb1">Data Diri</span>
-        <span class="step-label"        id="lb2">Akademik</span>
-        <span class="step-label"        id="lb3">Unggah File</span>
-      </div>
-    </div>
+    <!-- ══ Toast ══════════════════════════════════════════════════ -->
+    <div id="toast"></div>
 
-    <!-- ════════════════════════════════════════════════════
+    <!-- ══ Page wrapper ═══════════════════════════════════════════ -->
+    <div class="page-wrap">
+
+        <!-- Header -->
+        <div class="header">
+            <img src="https://i.imgur.com/JkxRYd6.png" alt="Logo" class="header-logo"
+                onerror="this.style.display='none'">
+            <h1>📘 MAGISTER &amp; SARJANA</h1>
+            <p>Sistem Pengumpulan Naskah Skripsi / Tesis &nbsp;<i class="fas fa-cloud-upload-alt"
+                    style="color:var(--blue-light)"></i></p>
+        </div>
+
+        <!-- Tab switcher -->
+        <div class="tab-group">
+            <button id="tabSkripsi" class="tab-btn active-skripsi" onclick="switchType('skripsi')">
+                <i class="fas fa-book-open"></i> Skripsi (S1)
+            </button>
+            <button id="tabTesis" class="tab-btn inactive" onclick="switchType('tesis')">
+                <i class="fas fa-graduation-cap"></i> Tesis (S2)
+            </button>
+        </div>
+
+        <!-- Card -->
+        <div class="card" id="mainCard">
+
+            <!-- Card header -->
+            <div class="card-header">
+                <div class="card-header-icon icon-blue" id="cardIcon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <div>
+                    <h2 id="cardTitle">Form Pengumpulan Skripsi</h2>
+                    <p>Isi data dengan lengkap dan benar &nbsp;·&nbsp; <span style="color:var(--error)">*</span> wajib
+                        diisi</p>
+                </div>
+            </div>
+
+            <!-- ── Progress bar ──────────────────────────────────── -->
+            <div class="progress-wrap">
+                <div class="progress-steps" id="progressSteps">
+                    <div class="step-circle active" id="sc1">1</div>
+                    <div class="step-line" id="sl1"></div>
+                    <div class="step-circle" id="sc2">2</div>
+                    <div class="step-line" id="sl2"></div>
+                    <div class="step-circle" id="sc3">3</div>
+                </div>
+                <div class="step-labels">
+                    <span class="step-label active" id="lb1">Data Diri</span>
+                    <span class="step-label" id="lb2">Akademik</span>
+                    <span class="step-label" id="lb3">Unggah File</span>
+                </div>
+            </div>
+
+            <!-- ════════════════════════════════════════════════════
          STEP 1 – Data Diri
     ════════════════════════════════════════════════════════ -->
-    <div class="step-panel active" id="step1">
-      <div class="grid-2">
+            <div class="step-panel active" id="step1">
+                <div class="grid-2">
 
-        <div class="field col-span-2">
-          <label for="f_nama"><i class="fas fa-user text-xs text-muted"></i> Nama Lengkap <span class="req">*</span></label>
-          <div class="input-wrap">
-            <i class="fas fa-user input-icon"></i>
-            <input type="text" id="f_nama" placeholder="Contoh: Ahmad Fauzi" autocomplete="name">
-          </div>
-        </div>
+                    <div class="field col-span-2">
+                        <label for="f_nama"><i class="fas fa-user text-xs text-muted"></i> Nama Lengkap <span
+                                class="req">*</span></label>
+                        <div class="input-wrap">
+                            <i class="fas fa-user input-icon"></i>
+                            <input type="text" id="f_nama" placeholder="Contoh: Ahmad Fauzi" autocomplete="name">
+                        </div>
+                    </div>
 
-        <div class="field">
-          <label for="f_nim">NIM <span class="req">*</span></label>
-          <div class="input-wrap">
-            <i class="fas fa-id-card input-icon"></i>
-            <input type="text" id="f_nim" placeholder="Contoh: 202241001" maxlength="9" inputmode="numeric">
-          </div>
-          <div id="nimFeedback"></div>
-        </div>
+                    <div class="field">
+                        <label for="f_nim">NIM <span class="req">*</span></label>
+                        <div class="input-wrap">
+                            <i class="fas fa-id-card input-icon"></i>
+                            <input type="text" id="f_nim" placeholder="Contoh: 202241001" maxlength="9"
+                                inputmode="numeric">
+                        </div>
+                        <div id="nimFeedback"></div>
+                    </div>
 
-        <div class="field">
-          <label for="f_no_wa"><i class="fab fa-whatsapp text-xs text-muted"></i> No. WhatsApp <span class="req">*</span></label>
-          <div class="input-wrap">
-            <i class="fab fa-whatsapp input-icon"></i>
-            <input type="tel" id="f_no_wa" placeholder="Contoh: 08123456789" inputmode="tel">
-          </div>
-        </div>
+                    <div class="field">
+                        <label for="f_no_wa"><i class="fab fa-whatsapp text-xs text-muted"></i> No. WhatsApp <span
+                                class="req">*</span></label>
+                        <div class="input-wrap">
+                            <i class="fab fa-whatsapp input-icon"></i>
+                            <input type="tel" id="f_no_wa" placeholder="Contoh: 08123456789" inputmode="tel">
+                        </div>
+                    </div>
 
-        <div class="field col-span-2">
-          <label for="f_konsentrasi">Konsentrasi <span class="req">*</span></label>
-          <select id="f_konsentrasi" class="no-icon">
-            <option value="">— Pilih Konsentrasi —</option>
-          </select>
-        </div>
+                    <div class="field col-span-2">
+                        <label for="f_konsentrasi">Konsentrasi <span class="req">*</span></label>
+                        <select id="f_konsentrasi" class="no-icon">
+                            <option value="">— Pilih Konsentrasi —</option>
+                        </select>
+                    </div>
 
-        <div class="field col-span-2">
-          <label><i class="fas fa-calendar-alt text-xs text-muted"></i> Tahun Akademik</label>
-          <div class="input-wrap">
-            <i class="fas fa-calendar-alt input-icon"></i>
-            <input type="text" id="f_tahun_akademik" class="" readonly>
-          </div>
-        </div>
+                    <div class="field col-span-2">
+                        <label><i class="fas fa-calendar-alt text-xs text-muted"></i> Tahun Akademik</label>
+                        <div class="input-wrap">
+                            <i class="fas fa-calendar-alt input-icon"></i>
+                            <input type="text" id="f_tahun_akademik" class="" readonly>
+                        </div>
+                    </div>
 
-      </div>
-    </div>
+                </div>
+            </div>
 
-    <!-- ════════════════════════════════════════════════════
+            <!-- ════════════════════════════════════════════════════
          STEP 2 – Data Akademik
     ════════════════════════════════════════════════════════ -->
-    <div class="step-panel" id="step2">
-      <div class="grid-2">
+            <div class="step-panel" id="step2">
+                <div class="grid-2">
 
-        <div class="field col-span-2">
-          <label for="f_pembimbing_utama">
-            <i class="fas fa-chalkboard-teacher text-xs text-muted"></i>
-            Pembimbing Utama <span class="req">*</span>
-          </label>
-          <div class="input-wrap">
-            <i class="fas fa-chalkboard-teacher input-icon"></i>
-            <input type="text" id="f_pembimbing_utama" placeholder="Contoh: Dr. Ahmad Fauzi, M.Si">
-          </div>
-        </div>
+                    <div class="field col-span-2">
+                        <label for="f_pembimbing_utama">
+                            <i class="fas fa-chalkboard-teacher text-xs text-muted"></i>
+                            Pembimbing Utama <span class="req">*</span>
+                        </label>
+                        <div class="input-wrap">
+                            <i class="fas fa-chalkboard-teacher input-icon"></i>
+                            <input type="text" id="f_pembimbing_utama" placeholder="Contoh: Dr. Ahmad Fauzi, M.Si">
+                        </div>
+                    </div>
 
-        <div class="field col-span-2">
-          <label for="f_pembimbing_pendamping">
-            <i class="fas fa-user-tie text-xs text-muted"></i>
-            Pembimbing Pendamping <span class="opt">opsional</span>
-          </label>
-          <div class="input-wrap">
-            <i class="fas fa-user-tie input-icon"></i>
-            <input type="text" id="f_pembimbing_pendamping" placeholder="Contoh: Dr. Budi Santoso, M.Pd (kosongkan jika tidak ada)">
-          </div>
-        </div>
+                    <div class="field col-span-2">
+                        <label for="f_pembimbing_pendamping">
+                            <i class="fas fa-user-tie text-xs text-muted"></i>
+                            Pembimbing Pendamping <span class="opt">opsional</span>
+                        </label>
+                        <div class="input-wrap">
+                            <i class="fas fa-user-tie input-icon"></i>
+                            <input type="text" id="f_pembimbing_pendamping"
+                                placeholder="Contoh: Dr. Budi Santoso, M.Pd (kosongkan jika tidak ada)">
+                        </div>
+                    </div>
 
-        <div class="field col-span-2">
-          <label for="f_ketua_penguji">
-            <i class="fas fa-user-check text-xs text-muted"></i>
-            Ketua Penguji <span class="req">*</span>
-          </label>
-          <div class="input-wrap">
-            <i class="fas fa-user-check input-icon"></i>
-            <input type="text" id="f_ketua_penguji" placeholder="Contoh: Prof. Dr. Sari Dewi, M.Kom">
-          </div>
-        </div>
+                    <div class="field col-span-2">
+                        <label for="f_ketua_penguji">
+                            <i class="fas fa-user-check text-xs text-muted"></i>
+                            Ketua Penguji <span class="req">*</span>
+                        </label>
+                        <div class="input-wrap">
+                            <i class="fas fa-user-check input-icon"></i>
+                            <input type="text" id="f_ketua_penguji" placeholder="Contoh: Prof. Dr. Sari Dewi, M.Kom">
+                        </div>
+                    </div>
 
-        <div class="field col-span-2">
-          <label for="f_anggota_penguji">
-            <i class="fas fa-users text-xs text-muted"></i>
-            Anggota Penguji <span class="opt">opsional</span>
-          </label>
-          <div class="input-wrap">
-            <i class="fas fa-users input-icon"></i>
-            <input type="text" id="f_anggota_penguji" placeholder="Contoh: Dr. Dian Pratiwi, M.T (kosongkan jika tidak ada)">
-          </div>
-        </div>
+                    <div class="field col-span-2">
+                        <label for="f_anggota_penguji">
+                            <i class="fas fa-users text-xs text-muted"></i>
+                            Anggota Penguji <span class="opt">opsional</span>
+                        </label>
+                        <div class="input-wrap">
+                            <i class="fas fa-users input-icon"></i>
+                            <input type="text" id="f_anggota_penguji"
+                                placeholder="Contoh: Dr. Dian Pratiwi, M.T (kosongkan jika tidak ada)">
+                        </div>
+                    </div>
 
-      </div>
-    </div>
+                </div>
+            </div>
 
-    <!-- ════════════════════════════════════════════════════
+            <!-- ════════════════════════════════════════════════════
          STEP 3 – Upload File
     ════════════════════════════════════════════════════════ -->
-    <div class="step-panel" id="step3">
-
-      <!-- Cover–Abstrak -->
-      <div class="field">
-        <label>
-          <i class="fas fa-file-pdf" style="color:var(--error)"></i>
-          File Persyaratan (Cover s.d. Abstrak) <span class="req">*</span>
-        </label>
-        <div class="file-zone" id="fzCover" onclick="document.getElementById('f_cover').click()">
-          <input type="file" id="f_cover" accept=".pdf">
-          <div class="fz-icon"><i class="fas fa-cloud-upload-alt" style="color:var(--blue-light)"></i></div>
-          <div class="fz-title">Klik untuk memilih file PDF</div>
-          <div class="fz-sub">Cover hingga halaman Abstrak · maks. 20 MB</div>
-          <span class="fz-name hidden" id="nameCover">—</span>
-        </div>
-        <div class="preview-box" id="prevCover">
-          <i class="fas fa-eye" style="font-size:1.5rem"></i>
-          <span>Preview akan muncul setelah memilih file</span>
-        </div>
-      </div>
-
-      <div class="section-divider">File Naskah Lengkap</div>
-
-      <!-- Naskah Lengkap -->
-      <div class="field">
-        <label>
-          <i class="fas fa-file-pdf" style="color:var(--error)"></i>
-          Naskah <span id="lblFullType">Skripsi</span> Lengkap PDF <span class="req">*</span>
-        </label>
-        <div class="file-zone" id="fzFull" onclick="document.getElementById('f_full').click()">
-          <input type="file" id="f_full" accept=".pdf">
-          <div class="fz-icon"><i class="fas fa-upload" style="color:var(--blue-light)"></i></div>
-          <div class="fz-title">Klik untuk memilih file PDF</div>
-          <div class="fz-sub">Naskah lengkap semua bab · maks. 50 MB</div>
-          <span class="fz-name hidden" id="nameFull">—</span>
-        </div>
-        <div class="preview-box" id="prevFull">
-          <i class="fas fa-eye" style="font-size:1.5rem"></i>
-          <span>Preview akan muncul setelah memilih file</span>
-        </div>
-      </div>
-
-      <!-- Summary -->
-      <div class="summary-box" id="summaryBox">
-        <h4><i class="fas fa-clipboard-check" style="color:var(--blue-mid)"></i> Ringkasan Data</h4>
-        <div id="summaryContent"></div>
-      </div>
-
-    </div><!-- /step3 -->
-
-    <!-- ── Navigation buttons ─────────────────────────────── -->
-    <div class="nav-btns">
-      <button class="btn btn-ghost hidden" id="btnPrev" onclick="goPrev()">
-        <i class="fas fa-arrow-left"></i> Kembali
-      </button>
-      <div style="margin-left:auto;display:flex;gap:.6rem">
-        <button class="btn btn-ghost" id="btnReset" onclick="resetAll()">
-          <i class="fas fa-undo-alt"></i> Reset
-        </button>
-        <button class="btn btn-primary-blue" id="btnNext" onclick="goNext()">
-          Lanjut <i class="fas fa-arrow-right"></i>
-        </button>
-        <button class="btn btn-success hidden" id="btnSubmit" onclick="doSubmit()">
-          <i class="fas fa-paper-plane"></i> Kirim
-        </button>
-      </div>
-    </div>
-
-  </div><!-- /card -->
-</div><!-- /page-wrap -->
-
-<script>
-// ══════════════════════════════════════════════════════════════
-//  CONFIG
-// ══════════════════════════════════════════════════════════════
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwUecpzOSITTNyoAY96eVw2qpSObqaAdZLNez1_7W1vECkT96U_0QK97UGpjk52FqqR/exec";
-
-const KONSENTRASI = {
-  skripsi: ['Digital Public Relations','Digital Advertising','Digital Media Journalism','Digital Broadcasting'],
-  tesis:   ['Digital Public Relations','Digital Advertising','Digital Media Journalism','Manajemen Media']
-};
-
-// ══════════════════════════════════════════════════════════════
-//  STATE
-// ══════════════════════════════════════════════════════════════
-let currentType  = 'skripsi';
-let currentStep  = 1;
-let coverObjURL  = null;   // kept alive until replaced
-let fullObjURL   = null;
-
-// ══════════════════════════════════════════════════════════════
-//  INIT
-// ══════════════════════════════════════════════════════════════
-(function init() {
-  setTahunAkademik();
-  populateKonsentrasi('skripsi');
-  bindFileInputs();
-  bindNIMInput();
-})();
-
-// ── Semester / Tahun Akademik ──────────────────────────────
-function getSemesterData() {
-  const m = new Date().getMonth() + 1;
-  const y = new Date().getFullYear();
-  if ((m >= 9 && m <= 12) || (m >= 1 && m <= 2)) {
-    const ts = m >= 9 ? y : y - 1;
-    return { prefix: `${ts}1`, text: `${ts}/${ts + 1} Ganjil` };
-  } else {
-    const ts = y - 1;
-    return { prefix: `${ts + 1}2`, text: `${ts}/${ts + 1} Genap` };
-  }
-}
-
-function setTahunAkademik() {
-  document.getElementById('f_tahun_akademik').value = getSemesterData().text;
-}
-
-// ── Konsentrasi select ─────────────────────────────────────
-function populateKonsentrasi(type) {
-  const sel = document.getElementById('f_konsentrasi');
-  sel.innerHTML = '<option value="">— Pilih Konsentrasi —</option>';
-  KONSENTRASI[type].forEach(k => {
-    const o = document.createElement('option');
-    o.value = o.textContent = k;
-    sel.appendChild(o);
-  });
-}
-
-// ══════════════════════════════════════════════════════════════
-//  TYPE SWITCH (Skripsi ↔ Tesis)
-// ══════════════════════════════════════════════════════════════
-function switchType(type) {
-  if (type === currentType) return;
-  currentType = type;
-
-  const card  = document.getElementById('mainCard');
-  const isS   = type === 'skripsi';
-
-  // Tab buttons
-  document.getElementById('tabSkripsi').className = 'tab-btn ' + (isS ? 'active-skripsi' : 'inactive');
-  document.getElementById('tabTesis').className   = 'tab-btn ' + (isS ? 'inactive'        : 'active-tesis');
-
-  // Card styling
-  card.className = 'card ' + (isS ? 'type-skripsi' : 'type-tesis');
-
-  // Icon & title
-  document.getElementById('cardIcon').className   = 'card-header-icon ' + (isS ? 'icon-blue' : 'icon-purple');
-  document.getElementById('cardIcon').innerHTML   = `<i class="fas ${isS ? 'fa-file-alt' : 'fa-scroll'}"></i>`;
-  document.getElementById('cardTitle').textContent = isS ? 'Form Pengumpulan Skripsi' : 'Form Pengumpulan Tesis';
-  document.getElementById('lblFullType').textContent = isS ? 'Skripsi' : 'Tesis';
-
-  // Buttons
-  document.getElementById('btnNext').className   = 'btn ' + (isS ? 'btn-primary-blue' : 'btn-primary-purple');
-  document.getElementById('btnSubmit').className = 'btn btn-success';
-
-  // Konsentrasi
-  populateKonsentrasi(type);
-
-  // NIM placeholder & re-validate
-  document.getElementById('f_nim').placeholder = isS ? 'Contoh: 202241001' : 'Contoh: 202203001';
-  validateNIMField();
-
-  // Go back to step 1
-  goToStep(1, false);
-}
-
-// ══════════════════════════════════════════════════════════════
-//  NIM VALIDATION
-//  Rules:
-//    1. Harus 9 digit angka (tidak boleh lebih / kurang)
-//    2. Digit ke-5 & 6 (index 4,5): '41' = Skripsi, '03' = Tesis
-//    3. Digit ke-7,8,9 (index 6,7,8): tepat 3 digit — otomatis
-//       terpenuhi jika total 9 digit
-// ══════════════════════════════════════════════════════════════
-function bindNIMInput() {
-  document.getElementById('f_nim').addEventListener('input', function () {
-    // Allow numbers only, max 9
-    this.value = this.value.replace(/\D/g, '').slice(0, 9);
-    validateNIMField();
-  });
-}
-
-function validateNIMField() {
-  const nim = document.getElementById('f_nim').value.trim();
-  const fb  = document.getElementById('nimFeedback');
-  if (!nim) { fb.innerHTML = ''; return false; }
-
-  const { ok, msg } = validateNIM(nim, currentType);
-  if (ok) {
-    fb.innerHTML = `<div class="nim-ok"><i class="fas fa-check-circle"></i> NIM valid</div>`;
-    return true;
-  } else {
-    fb.innerHTML = `<div class="nim-error"><i class="fas fa-exclamation-circle"></i> ${msg}</div>`;
-    return false;
-  }
-}
-
-function validateNIM(nim, type) {
-  if (!/^\d+$/.test(nim))    return { ok: false, msg: 'NIM hanya boleh berisi angka.' };
-  if (nim.length < 9)        return { ok: false, msg: `NIM harus 9 digit. Saat ini ${nim.length} digit.` };
-  if (nim.length > 9)        return { ok: false, msg: 'NIM tidak boleh lebih dari 9 digit.' };
-
-  // Digit 7-8-9 (index 6,7,8) — karena total 9, ini otomatis 3 digit ✓
-  const kode = nim.substring(4, 6);
-  if (type === 'skripsi' && kode !== '41')
-    return { ok: false, msg: 'Digit ke-5 & 6 harus "41" untuk Skripsi. Contoh: 202241001' };
-  if (type === 'tesis' && kode !== '03')
-    return { ok: false, msg: 'Digit ke-5 & 6 harus "03" untuk Tesis. Contoh: 202203001' };
-
-  return { ok: true };
-}
-
-// ══════════════════════════════════════════════════════════════
-//  FILE INPUTS  – FIX: revokeObjectURL hanya saat diganti,
-//                bukan langsung setelah createObjectURL
-// ══════════════════════════════════════════════════════════════
-function bindFileInputs() {
-  setupFileZone('f_cover', 'fzCover', 'nameCover', 'prevCover', 'cover');
-  setupFileZone('f_full',  'fzFull',  'nameFull',  'prevFull',  'full');
-}
-
-function setupFileZone(inputId, zoneId, nameId, prevId, slot) {
-  const input = document.getElementById(inputId);
-  const zone  = document.getElementById(zoneId);
-  const name  = document.getElementById(nameId);
-  const prev  = document.getElementById(prevId);
-
-  input.addEventListener('change', () => {
-    const file = input.files[0];
-    if (!file) return;
-
-    if (file.type !== 'application/pdf') {
-      showToast('⚠️ Harap pilih file PDF', 'error');
-      input.value = '';
-      return;
-    }
-    if (file.size > (slot === 'cover' ? 20 : 50) * 1024 * 1024) {
-      showToast(`⚠️ File terlalu besar (maks ${slot === 'cover' ? 20 : 50} MB)`, 'error');
-      input.value = '';
-      return;
-    }
-
-    // Update zone UI
-    zone.classList.add('has-file');
-    name.textContent = file.name;
-    name.classList.remove('hidden');
-
-    // PDF Preview – BUG FIX: revoke OLD URL only, keep new one alive
-    if (slot === 'cover') {
-      if (coverObjURL) URL.revokeObjectURL(coverObjURL);
-      coverObjURL = URL.createObjectURL(file);
-      prev.innerHTML = `<iframe src="${coverObjURL}" title="Preview Cover"></iframe>`;
-    } else {
-      if (fullObjURL) URL.revokeObjectURL(fullObjURL);
-      fullObjURL = URL.createObjectURL(file);
-      prev.innerHTML = `<iframe src="${fullObjURL}" title="Preview Full"></iframe>`;
-    }
-  });
-}
-
-// ══════════════════════════════════════════════════════════════
-//  PAGINATION
-// ══════════════════════════════════════════════════════════════
-function goNext() {
-  if (!validateStep(currentStep)) return;
-  goToStep(currentStep + 1, true);
-}
-function goPrev() {
-  goToStep(currentStep - 1, false);
-}
-
-function goToStep(n, forward) {
-  const oldPanel = document.getElementById(`step${currentStep}`);
-  oldPanel.classList.remove('active', 'slide-left');
-  oldPanel.style.display = 'none';
-
-  currentStep = n;
-
-  const newPanel = document.getElementById(`step${currentStep}`);
-  newPanel.style.display = 'block';
-  newPanel.classList.remove('active', 'slide-left');
-  // Force reflow for animation restart
-  void newPanel.offsetWidth;
-  newPanel.classList.add(forward ? 'active' : 'slide-left');
-
-  updateProgress();
-
-  if (currentStep === 3) buildSummary();
-}
-
-function updateProgress() {
-  const total = 3;
-  for (let i = 1; i <= total; i++) {
-    const sc = document.getElementById(`sc${i}`);
-    const lb = document.getElementById(`lb${i}`);
-
-    sc.classList.remove('active', 'done');
-    lb.classList.remove('active', 'done-lbl');
-
-    if (i < currentStep)      { sc.classList.add('done');   sc.innerHTML = '<i class="fas fa-check" style="font-size:.7rem"></i>'; lb.classList.add('done-lbl'); }
-    else if (i === currentStep){ sc.classList.add('active'); sc.textContent = i; lb.classList.add('active');    }
-    else                       { sc.textContent = i; }
-  }
-  for (let i = 1; i < total; i++) {
-    document.getElementById(`sl${i}`).classList.toggle('done', i < currentStep);
-  }
-
-  // Nav buttons
-  document.getElementById('btnPrev').classList.toggle('hidden', currentStep === 1);
-  document.getElementById('btnNext').classList.toggle('hidden', currentStep === total);
-  document.getElementById('btnSubmit').classList.toggle('hidden', currentStep !== total);
-}
-
-// ══════════════════════════════════════════════════════════════
-//  STEP VALIDATION
-// ══════════════════════════════════════════════════════════════
-function validateStep(step) {
-  if (step === 1) {
-    const nama  = document.getElementById('f_nama').value.trim();
-    const nim   = document.getElementById('f_nim').value.trim();
-    const noWa  = document.getElementById('f_no_wa').value.trim();
-    const konsen= document.getElementById('f_konsentrasi').value;
-
-    if (!nama)   { showToast('⚠️ Nama lengkap wajib diisi', 'error'); shake('f_nama');  return false; }
-    if (!nim)    { showToast('⚠️ NIM wajib diisi', 'error'); shake('f_nim');  return false; }
-
-    const { ok, msg } = validateNIM(nim, currentType);
-    if (!ok) { showToast('❌ ' + msg, 'error'); shake('f_nim'); return false; }
-
-    if (!noWa)   { showToast('⚠️ No. WhatsApp wajib diisi', 'error'); shake('f_no_wa');  return false; }
-    if (!konsen) { showToast('⚠️ Pilih konsentrasi terlebih dahulu', 'error'); shake('f_konsentrasi'); return false; }
-  }
-
-  if (step === 2) {
-    const pu  = document.getElementById('f_pembimbing_utama').value.trim();
-    const kp  = document.getElementById('f_ketua_penguji').value.trim();
-    if (!pu)  { showToast('⚠️ Pembimbing Utama wajib diisi', 'error'); shake('f_pembimbing_utama'); return false; }
-    if (!kp)  { showToast('⚠️ Ketua Penguji wajib diisi', 'error'); shake('f_ketua_penguji'); return false; }
-  }
-
-  if (step === 3) {
-    const cover = document.getElementById('f_cover').files[0];
-    const full  = document.getElementById('f_full').files[0];
-    if (!cover) { showToast('⚠️ Upload file Cover–Abstrak terlebih dahulu', 'error'); shake('fzCover'); return false; }
-    if (!full)  { showToast('⚠️ Upload naskah lengkap terlebih dahulu', 'error'); shake('fzFull');  return false; }
-  }
-
-  return true;
-}
-
-// ── Shake animation on error ───────────────────────────────
-function shake(id) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  el.style.transition = 'transform .08s ease';
-  let count = 0;
-  const interval = setInterval(() => {
-    el.style.transform = count % 2 === 0 ? 'translateX(5px)' : 'translateX(-5px)';
-    if (++count >= 6) { clearInterval(interval); el.style.transform = ''; }
-  }, 60);
-}
-
-// ══════════════════════════════════════════════════════════════
-//  SUMMARY
-// ══════════════════════════════════════════════════════════════
-function buildSummary() {
-  const rows = [
-    ['Jenis',         currentType === 'skripsi' ? '📘 Skripsi (S1)' : '🎓 Tesis (S2)'],
-    ['Nama',          document.getElementById('f_nama').value],
-    ['NIM',           document.getElementById('f_nim').value],
-    ['No. WA',        document.getElementById('f_no_wa').value],
-    ['Konsentrasi',   document.getElementById('f_konsentrasi').value],
-    ['Tahun Akademik',document.getElementById('f_tahun_akademik').value],
-    ['Pembimbing 1',  document.getElementById('f_pembimbing_utama').value],
-    ['Pembimbing 2',  document.getElementById('f_pembimbing_pendamping').value || '—'],
-    ['Ketua Penguji', document.getElementById('f_ketua_penguji').value],
-    ['Anggota Penguji',document.getElementById('f_anggota_penguji').value || '—'],
-  ];
-  document.getElementById('summaryContent').innerHTML = rows
-    .map(([k, v]) => `<div class="summary-row"><span>${k}</span><span>${v}</span></div>`)
-    .join('');
-}
-
-// ══════════════════════════════════════════════════════════════
-//  RESET
-// ══════════════════════════════════════════════════════════════
-function resetAll() {
-  if (!confirm('Reset semua data? Perubahan akan hilang.')) return;
-
-  // Inputs
-  ['f_nama','f_nim','f_no_wa','f_pembimbing_utama','f_pembimbing_pendamping',
-   'f_ketua_penguji','f_anggota_penguji'].forEach(id => {
-    document.getElementById(id).value = '';
-  });
-  document.getElementById('f_konsentrasi').value = '';
-  document.getElementById('nimFeedback').innerHTML = '';
-  setTahunAkademik();
-
-  // Files
-  ['f_cover','f_full'].forEach(id => { document.getElementById(id).value = ''; });
-  resetFileZone('fzCover','nameCover','prevCover');
-  resetFileZone('fzFull',  'nameFull',  'prevFull');
-  if (coverObjURL) { URL.revokeObjectURL(coverObjURL); coverObjURL = null; }
-  if (fullObjURL)  { URL.revokeObjectURL(fullObjURL);  fullObjURL  = null; }
-
-  goToStep(1, false);
-  showToast('🔄 Form telah direset', 'info');
-}
-
-function resetFileZone(zoneId, nameId, prevId) {
-  const zone = document.getElementById(zoneId);
-  const name = document.getElementById(nameId);
-  const prev = document.getElementById(prevId);
-  zone.classList.remove('has-file');
-  name.classList.add('hidden');
-  prev.innerHTML = `<i class="fas fa-eye" style="font-size:1.5rem"></i><span>Preview akan muncul setelah memilih file</span>`;
-}
-
-// ══════════════════════════════════════════════════════════════
-//  SUBMIT  – Base64 JSON ke GAS
-//  BUG FIX: FormData multipart tidak didukung GAS untuk file.
-//           Konversi file ke base64, kirim sebagai JSON text/plain
-//           (menghindari CORS preflight OPTIONS yang ditolak GAS)
-// ══════════════════════════════════════════════════════════════
-async function doSubmit() {
-  if (!validateStep(3)) return;
-
-  const coverFile = document.getElementById('f_cover').files[0];
-  const fullFile  = document.getElementById('f_full').files[0];
-
-  showLoading('Mengonversi file ke base64...', 'Harap tunggu, proses ini bergantung ukuran file');
-
-  try {
-    const [coverB64, fullB64] = await Promise.all([
-      fileToBase64(coverFile),
-      fileToBase64(fullFile)
-    ]);
-
-    setLoadingMsg('Mengunggah data ke server...', 'Jangan tutup atau refresh halaman ini');
-
-    const { prefix, text } = getSemesterData();
-
-    const payload = {
-      type                 : currentType,
-      nama                 : document.getElementById('f_nama').value.trim(),
-      nim                  : document.getElementById('f_nim').value.trim(),
-      no_wa                : document.getElementById('f_no_wa').value.trim(),
-      konsentrasi          : document.getElementById('f_konsentrasi').value,
-      tahun_akademik       : text,
-      semester_prefix      : prefix,
-      pembimbing_utama     : document.getElementById('f_pembimbing_utama').value.trim(),
-      pembimbing_pendamping: document.getElementById('f_pembimbing_pendamping').value.trim(),
-      ketua_penguji        : document.getElementById('f_ketua_penguji').value.trim(),
-      anggota_penguji      : document.getElementById('f_anggota_penguji').value.trim(),
-      coverAbstrackFile    : coverB64,
-      fullFile             : fullB64
-    };
-
-    // GAS tidak mendukung preflight OPTIONS → kirim sebagai text/plain
-    const res = await fetch(APPS_SCRIPT_URL, {
-      method : 'POST',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body   : JSON.stringify(payload)
-    });
-
-    let result;
-    try { result = await res.json(); }
-    catch { result = { status: 'error', message: 'Respons server tidak valid.' }; }
-
-    hideLoading();
-
-    if (result.status === 'success') {
-      showToast(`✅ ${currentType === 'skripsi' ? 'Skripsi' : 'Tesis'} berhasil disimpan!`, 'success');
-      setTimeout(() => resetAll(), 1800);
-    } else {
-      showToast(`❌ Gagal: ${result.message}`, 'error');
-    }
-
-  } catch (err) {
-    hideLoading();
-    console.error(err);
-    showToast('⚠️ Gagal koneksi ke server. Periksa URL Apps Script.', 'error');
-  }
-}
-
-// ── File → base64 ──────────────────────────────────────────
-function fileToBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload  = () => resolve(reader.result.split(',')[1]);
-    reader.onerror = () => reject(new Error('Gagal membaca file'));
-    reader.readAsDataURL(file);
-  });
-}
-
-// ══════════════════════════════════════════════════════════════
-//  UI HELPERS
-// ══════════════════════════════════════════════════════════════
-let toastTimer;
-function showToast(msg, type = 'info') {
-  const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.className = `t-${type} show`;
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => { el.classList.remove('show'); }, 4000);
-}
-
-function showLoading(msg, detail) {
-  document.getElementById('loadingMsg').textContent = msg || 'Memproses...';
-  document.getElementById('loadingDetail').textContent = detail || '';
-  document.getElementById('loadingOverlay').classList.add('show');
-}
-function setLoadingMsg(msg, detail) {
-  document.getElementById('loadingMsg').textContent = msg;
-  document.getElementById('loadingDetail').textContent = detail || '';
-}
-function hideLoading() {
-  document.getElementById('loadingOverlay').classList.remove('show');
-}
-
-// Guard
-if (APPS_SCRIPT_URL.includes('PASTE_YOUR')) {
-  console.warn('⚠️ Ganti APPS_SCRIPT_URL dengan URL web app yang sudah dideploy!');
-}
-</script>
+            <div class="step-panel" id="step3">
+
+                <!-- Cover–Abstrak -->
+                <div class="field">
+                    <label>
+                        <i class="fas fa-file-pdf" style="color:var(--error)"></i>
+                        File Persyaratan (Cover s.d. Abstrak) <span class="req">*</span>
+                    </label>
+                    <div class="file-zone" id="fzCover" onclick="document.getElementById('f_cover').click()">
+                        <input type="file" id="f_cover" accept=".pdf">
+                        <div class="fz-icon"><i class="fas fa-cloud-upload-alt" style="color:var(--blue-light)"></i>
+                        </div>
+                        <div class="fz-title">Klik untuk memilih file PDF</div>
+                        <div class="fz-sub">Cover hingga halaman Abstrak · maks. 20 MB</div>
+                        <span class="fz-name hidden" id="nameCover">—</span>
+                    </div>
+                    <div class="preview-box" id="prevCover">
+                        <i class="fas fa-eye" style="font-size:1.5rem"></i>
+                        <span>Preview akan muncul setelah memilih file</span>
+                    </div>
+                </div>
+
+                <div class="section-divider">File Naskah Lengkap</div>
+
+                <!-- Naskah Lengkap -->
+                <div class="field">
+                    <label>
+                        <i class="fas fa-file-pdf" style="color:var(--error)"></i>
+                        Naskah <span id="lblFullType">Skripsi</span> Lengkap PDF <span class="req">*</span>
+                    </label>
+                    <div class="file-zone" id="fzFull" onclick="document.getElementById('f_full').click()">
+                        <input type="file" id="f_full" accept=".pdf">
+                        <div class="fz-icon"><i class="fas fa-upload" style="color:var(--blue-light)"></i></div>
+                        <div class="fz-title">Klik untuk memilih file PDF</div>
+                        <div class="fz-sub">Naskah lengkap semua bab · maks. 50 MB</div>
+                        <span class="fz-name hidden" id="nameFull">—</span>
+                    </div>
+                    <div class="preview-box" id="prevFull">
+                        <i class="fas fa-eye" style="font-size:1.5rem"></i>
+                        <span>Preview akan muncul setelah memilih file</span>
+                    </div>
+                </div>
+
+                <!-- Summary -->
+                <div class="summary-box" id="summaryBox">
+                    <h4><i class="fas fa-clipboard-check" style="color:var(--blue-mid)"></i> Ringkasan Data</h4>
+                    <div id="summaryContent"></div>
+                </div>
+
+            </div><!-- /step3 -->
+
+            <!-- ── Navigation buttons ─────────────────────────────── -->
+            <div class="nav-btns">
+                <button class="btn btn-ghost hidden" id="btnPrev" onclick="goPrev()">
+                    <i class="fas fa-arrow-left"></i> Kembali
+                </button>
+                <div style="margin-left:auto;display:flex;gap:.6rem">
+                    <button class="btn btn-ghost" id="btnReset" onclick="resetAll()">
+                        <i class="fas fa-undo-alt"></i> Reset
+                    </button>
+                    <button class="btn btn-primary-blue" id="btnNext" onclick="goNext()">
+                        Lanjut <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="btn btn-success hidden" id="btnSubmit" onclick="doSubmit()">
+                        <i class="fas fa-paper-plane"></i> Kirim
+                    </button>
+                </div>
+            </div>
+
+        </div><!-- /card -->
+    </div><!-- /page-wrap -->
+
+    <script>
+        // ══════════════════════════════════════════════════════════════
+        //  CONFIG
+        // ══════════════════════════════════════════════════════════════
+        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwUecpzOSITTNyoAY96eVw2qpSObqaAdZLNez1_7W1vECkT96U_0QK97UGpjk52FqqR/exec";
+
+        const KONSENTRASI = {
+            skripsi: ['Digital Public Relations', 'Digital Advertising', 'Digital Media Journalism', 'Digital Broadcasting'],
+            tesis: ['Digital Public Relations', 'Digital Advertising', 'Digital Media Journalism', 'Manajemen Media']
+        };
+
+        // ══════════════════════════════════════════════════════════════
+        //  STATE
+        // ══════════════════════════════════════════════════════════════
+        let currentType = 'skripsi';
+        let currentStep = 1;
+        let coverObjURL = null;   // kept alive until replaced
+        let fullObjURL = null;
+
+        // ══════════════════════════════════════════════════════════════
+        //  INIT
+        // ══════════════════════════════════════════════════════════════
+        (function init() {
+            setTahunAkademik();
+            populateKonsentrasi('skripsi');
+            bindFileInputs();
+            bindNIMInput();
+        })();
+
+        // ── Semester / Tahun Akademik ──────────────────────────────
+        function getSemesterData() {
+            const m = new Date().getMonth() + 1;
+            const y = new Date().getFullYear();
+            if ((m >= 9 && m <= 12) || (m >= 1 && m <= 2)) {
+                const ts = m >= 9 ? y : y - 1;
+                return { prefix: `${ts}1`, text: `${ts}/${ts + 1} Ganjil` };
+            } else {
+                const ts = y - 1;
+                return { prefix: `${ts + 1}2`, text: `${ts}/${ts + 1} Genap` };
+            }
+        }
+
+        function setTahunAkademik() {
+            document.getElementById('f_tahun_akademik').value = getSemesterData().text;
+        }
+
+        // ── Konsentrasi select ─────────────────────────────────────
+        function populateKonsentrasi(type) {
+            const sel = document.getElementById('f_konsentrasi');
+            sel.innerHTML = '<option value="">— Pilih Konsentrasi —</option>';
+            KONSENTRASI[type].forEach(k => {
+                const o = document.createElement('option');
+                o.value = o.textContent = k;
+                sel.appendChild(o);
+            });
+        }
+
+        // ══════════════════════════════════════════════════════════════
+        //  TYPE SWITCH (Skripsi ↔ Tesis)
+        // ══════════════════════════════════════════════════════════════
+        function switchType(type) {
+            if (type === currentType) return;
+            currentType = type;
+
+            const card = document.getElementById('mainCard');
+            const isS = type === 'skripsi';
+
+            // Tab buttons
+            document.getElementById('tabSkripsi').className = 'tab-btn ' + (isS ? 'active-skripsi' : 'inactive');
+            document.getElementById('tabTesis').className = 'tab-btn ' + (isS ? 'inactive' : 'active-tesis');
+
+            // Card styling
+            card.className = 'card ' + (isS ? 'type-skripsi' : 'type-tesis');
+
+            // Icon & title
+            document.getElementById('cardIcon').className = 'card-header-icon ' + (isS ? 'icon-blue' : 'icon-purple');
+            document.getElementById('cardIcon').innerHTML = `<i class="fas ${isS ? 'fa-file-alt' : 'fa-scroll'}"></i>`;
+            document.getElementById('cardTitle').textContent = isS ? 'Form Pengumpulan Skripsi' : 'Form Pengumpulan Tesis';
+            document.getElementById('lblFullType').textContent = isS ? 'Skripsi' : 'Tesis';
+
+            // Buttons
+            document.getElementById('btnNext').className = 'btn ' + (isS ? 'btn-primary-blue' : 'btn-primary-purple');
+            document.getElementById('btnSubmit').className = 'btn btn-success';
+
+            // Konsentrasi
+            populateKonsentrasi(type);
+
+            // NIM placeholder & re-validate
+            document.getElementById('f_nim').placeholder = isS ? 'Contoh: 202241001' : 'Contoh: 202203001';
+            validateNIMField();
+
+            // Go back to step 1
+            goToStep(1, false);
+        }
+
+        // ══════════════════════════════════════════════════════════════
+        //  NIM VALIDATION
+        //  Rules:
+        //    1. Harus 9 digit angka (tidak boleh lebih / kurang)
+        //    2. Digit ke-5 & 6 (index 4,5): '41' = Skripsi, '03' = Tesis
+        //    3. Digit ke-7,8,9 (index 6,7,8): tepat 3 digit — otomatis
+        //       terpenuhi jika total 9 digit
+        // ══════════════════════════════════════════════════════════════
+        function bindNIMInput() {
+            document.getElementById('f_nim').addEventListener('input', function () {
+                // Allow numbers only, max 9
+                this.value = this.value.replace(/\D/g, '').slice(0, 9);
+                validateNIMField();
+            });
+        }
+
+        function validateNIMField() {
+            const nim = document.getElementById('f_nim').value.trim();
+            const fb = document.getElementById('nimFeedback');
+            if (!nim) { fb.innerHTML = ''; return false; }
+
+            const { ok, msg } = validateNIM(nim, currentType);
+            if (ok) {
+                fb.innerHTML = `<div class="nim-ok"><i class="fas fa-check-circle"></i> NIM valid</div>`;
+                return true;
+            } else {
+                fb.innerHTML = `<div class="nim-error"><i class="fas fa-exclamation-circle"></i> ${msg}</div>`;
+                return false;
+            }
+        }
+
+        function validateNIM(nim, type) {
+            if (!/^\d+$/.test(nim)) return { ok: false, msg: 'NIM hanya boleh berisi angka.' };
+            if (nim.length < 9) return { ok: false, msg: `NIM harus 9 digit. Saat ini ${nim.length} digit.` };
+            if (nim.length > 9) return { ok: false, msg: 'NIM tidak boleh lebih dari 9 digit.' };
+
+            // Digit 7-8-9 (index 6,7,8) — karena total 9, ini otomatis 3 digit ✓
+            const kode = nim.substring(4, 6);
+            if (type === 'skripsi' && kode !== '41')
+                return { ok: false, msg: 'Digit ke-5 & 6 harus "41" untuk Skripsi. Contoh: 202241001' };
+            if (type === 'tesis' && kode !== '03')
+                return { ok: false, msg: 'Digit ke-5 & 6 harus "03" untuk Tesis. Contoh: 202203001' };
+
+            return { ok: true };
+        }
+
+        // ══════════════════════════════════════════════════════════════
+        //  FILE INPUTS  – FIX: revokeObjectURL hanya saat diganti,
+        //                bukan langsung setelah createObjectURL
+        // ══════════════════════════════════════════════════════════════
+        function bindFileInputs() {
+            setupFileZone('f_cover', 'fzCover', 'nameCover', 'prevCover', 'cover');
+            setupFileZone('f_full', 'fzFull', 'nameFull', 'prevFull', 'full');
+        }
+
+        function setupFileZone(inputId, zoneId, nameId, prevId, slot) {
+            const input = document.getElementById(inputId);
+            const zone = document.getElementById(zoneId);
+            const name = document.getElementById(nameId);
+            const prev = document.getElementById(prevId);
+
+            input.addEventListener('change', () => {
+                const file = input.files[0];
+                if (!file) return;
+
+                if (file.type !== 'application/pdf') {
+                    showToast('⚠️ Harap pilih file PDF', 'error');
+                    input.value = '';
+                    return;
+                }
+                if (file.size > (slot === 'cover' ? 20 : 50) * 1024 * 1024) {
+                    showToast(`⚠️ File terlalu besar (maks ${slot === 'cover' ? 20 : 50} MB)`, 'error');
+                    input.value = '';
+                    return;
+                }
+
+                // Update zone UI
+                zone.classList.add('has-file');
+                name.textContent = file.name;
+                name.classList.remove('hidden');
+
+                // PDF Preview – BUG FIX: revoke OLD URL only, keep new one alive
+                if (slot === 'cover') {
+                    if (coverObjURL) URL.revokeObjectURL(coverObjURL);
+                    coverObjURL = URL.createObjectURL(file);
+                    prev.innerHTML = `<iframe src="${coverObjURL}" title="Preview Cover"></iframe>`;
+                } else {
+                    if (fullObjURL) URL.revokeObjectURL(fullObjURL);
+                    fullObjURL = URL.createObjectURL(file);
+                    prev.innerHTML = `<iframe src="${fullObjURL}" title="Preview Full"></iframe>`;
+                }
+            });
+        }
+
+        // ══════════════════════════════════════════════════════════════
+        //  PAGINATION
+        // ══════════════════════════════════════════════════════════════
+        function goNext() {
+            if (!validateStep(currentStep)) return;
+            goToStep(currentStep + 1, true);
+        }
+        function goPrev() {
+            goToStep(currentStep - 1, false);
+        }
+
+        function goToStep(n, forward) {
+            const oldPanel = document.getElementById(`step${currentStep}`);
+            oldPanel.classList.remove('active', 'slide-left');
+            oldPanel.style.display = 'none';
+
+            currentStep = n;
+
+            const newPanel = document.getElementById(`step${currentStep}`);
+            newPanel.style.display = 'block';
+            newPanel.classList.remove('active', 'slide-left');
+            // Force reflow for animation restart
+            void newPanel.offsetWidth;
+            newPanel.classList.add(forward ? 'active' : 'slide-left');
+
+            updateProgress();
+
+            if (currentStep === 3) buildSummary();
+        }
+
+        function updateProgress() {
+            const total = 3;
+            for (let i = 1; i <= total; i++) {
+                const sc = document.getElementById(`sc${i}`);
+                const lb = document.getElementById(`lb${i}`);
+
+                sc.classList.remove('active', 'done');
+                lb.classList.remove('active', 'done-lbl');
+
+                if (i < currentStep) { sc.classList.add('done'); sc.innerHTML = '<i class="fas fa-check" style="font-size:.7rem"></i>'; lb.classList.add('done-lbl'); }
+                else if (i === currentStep) { sc.classList.add('active'); sc.textContent = i; lb.classList.add('active'); }
+                else { sc.textContent = i; }
+            }
+            for (let i = 1; i < total; i++) {
+                document.getElementById(`sl${i}`).classList.toggle('done', i < currentStep);
+            }
+
+            // Nav buttons
+            document.getElementById('btnPrev').classList.toggle('hidden', currentStep === 1);
+            document.getElementById('btnNext').classList.toggle('hidden', currentStep === total);
+            document.getElementById('btnSubmit').classList.toggle('hidden', currentStep !== total);
+        }
+
+        // ══════════════════════════════════════════════════════════════
+        //  STEP VALIDATION
+        // ══════════════════════════════════════════════════════════════
+        function validateStep(step) {
+            if (step === 1) {
+                const nama = document.getElementById('f_nama').value.trim();
+                const nim = document.getElementById('f_nim').value.trim();
+                const noWa = document.getElementById('f_no_wa').value.trim();
+                const konsen = document.getElementById('f_konsentrasi').value;
+
+                if (!nama) { showToast('⚠️ Nama lengkap wajib diisi', 'error'); shake('f_nama'); return false; }
+                if (!nim) { showToast('⚠️ NIM wajib diisi', 'error'); shake('f_nim'); return false; }
+
+                const { ok, msg } = validateNIM(nim, currentType);
+                if (!ok) { showToast('❌ ' + msg, 'error'); shake('f_nim'); return false; }
+
+                if (!noWa) { showToast('⚠️ No. WhatsApp wajib diisi', 'error'); shake('f_no_wa'); return false; }
+                if (!konsen) { showToast('⚠️ Pilih konsentrasi terlebih dahulu', 'error'); shake('f_konsentrasi'); return false; }
+            }
+
+            if (step === 2) {
+                const pu = document.getElementById('f_pembimbing_utama').value.trim();
+                const kp = document.getElementById('f_ketua_penguji').value.trim();
+                if (!pu) { showToast('⚠️ Pembimbing Utama wajib diisi', 'error'); shake('f_pembimbing_utama'); return false; }
+                if (!kp) { showToast('⚠️ Ketua Penguji wajib diisi', 'error'); shake('f_ketua_penguji'); return false; }
+            }
+
+            if (step === 3) {
+                const cover = document.getElementById('f_cover').files[0];
+                const full = document.getElementById('f_full').files[0];
+                if (!cover) { showToast('⚠️ Upload file Cover–Abstrak terlebih dahulu', 'error'); shake('fzCover'); return false; }
+                if (!full) { showToast('⚠️ Upload naskah lengkap terlebih dahulu', 'error'); shake('fzFull'); return false; }
+            }
+
+            return true;
+        }
+
+        // ── Shake animation on error ───────────────────────────────
+        function shake(id) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            el.style.transition = 'transform .08s ease';
+            let count = 0;
+            const interval = setInterval(() => {
+                el.style.transform = count % 2 === 0 ? 'translateX(5px)' : 'translateX(-5px)';
+                if (++count >= 6) { clearInterval(interval); el.style.transform = ''; }
+            }, 60);
+        }
+
+        // ══════════════════════════════════════════════════════════════
+        //  SUMMARY
+        // ══════════════════════════════════════════════════════════════
+        function buildSummary() {
+            const rows = [
+                ['Jenis', currentType === 'skripsi' ? '📘 Skripsi (S1)' : '🎓 Tesis (S2)'],
+                ['Nama', document.getElementById('f_nama').value],
+                ['NIM', document.getElementById('f_nim').value],
+                ['No. WA', document.getElementById('f_no_wa').value],
+                ['Konsentrasi', document.getElementById('f_konsentrasi').value],
+                ['Tahun Akademik', document.getElementById('f_tahun_akademik').value],
+                ['Pembimbing 1', document.getElementById('f_pembimbing_utama').value],
+                ['Pembimbing 2', document.getElementById('f_pembimbing_pendamping').value || '—'],
+                ['Ketua Penguji', document.getElementById('f_ketua_penguji').value],
+                ['Anggota Penguji', document.getElementById('f_anggota_penguji').value || '—'],
+            ];
+            document.getElementById('summaryContent').innerHTML = rows
+                .map(([k, v]) => `<div class="summary-row"><span>${k}</span><span>${v}</span></div>`)
+                .join('');
+        }
+
+        // ══════════════════════════════════════════════════════════════
+        //  RESET
+        // ══════════════════════════════════════════════════════════════
+        function resetAll() {
+            if (!confirm('Reset semua data? Perubahan akan hilang.')) return;
+
+            // Inputs
+            ['f_nama', 'f_nim', 'f_no_wa', 'f_pembimbing_utama', 'f_pembimbing_pendamping',
+                'f_ketua_penguji', 'f_anggota_penguji'].forEach(id => {
+                    document.getElementById(id).value = '';
+                });
+            document.getElementById('f_konsentrasi').value = '';
+            document.getElementById('nimFeedback').innerHTML = '';
+            setTahunAkademik();
+
+            // Files
+            ['f_cover', 'f_full'].forEach(id => { document.getElementById(id).value = ''; });
+            resetFileZone('fzCover', 'nameCover', 'prevCover');
+            resetFileZone('fzFull', 'nameFull', 'prevFull');
+            if (coverObjURL) { URL.revokeObjectURL(coverObjURL); coverObjURL = null; }
+            if (fullObjURL) { URL.revokeObjectURL(fullObjURL); fullObjURL = null; }
+
+            goToStep(1, false);
+            showToast('🔄 Form telah direset', 'info');
+        }
+
+        function resetFileZone(zoneId, nameId, prevId) {
+            const zone = document.getElementById(zoneId);
+            const name = document.getElementById(nameId);
+            const prev = document.getElementById(prevId);
+            zone.classList.remove('has-file');
+            name.classList.add('hidden');
+            prev.innerHTML = `<i class="fas fa-eye" style="font-size:1.5rem"></i><span>Preview akan muncul setelah memilih file</span>`;
+        }
+
+        // ══════════════════════════════════════════════════════════════
+        //  SUBMIT  – Base64 JSON ke GAS
+        //  BUG FIX: FormData multipart tidak didukung GAS untuk file.
+        //           Konversi file ke base64, kirim sebagai JSON text/plain
+        //           (menghindari CORS preflight OPTIONS yang ditolak GAS)
+        // ══════════════════════════════════════════════════════════════
+        async function doSubmit() {
+            if (!validateStep(3)) return;
+
+            const coverFile = document.getElementById('f_cover').files[0];
+            const fullFile = document.getElementById('f_full').files[0];
+
+            showLoading('Mengonversi file ke base64...', 'Harap tunggu, proses ini bergantung ukuran file');
+
+            try {
+                const [coverB64, fullB64] = await Promise.all([
+                    fileToBase64(coverFile),
+                    fileToBase64(fullFile)
+                ]);
+
+                setLoadingMsg('Mengunggah data ke server...', 'Jangan tutup atau refresh halaman ini');
+
+                const { prefix, text } = getSemesterData();
+
+                const payload = {
+                    type: currentType,
+                    nama: document.getElementById('f_nama').value.trim(),
+                    nim: document.getElementById('f_nim').value.trim(),
+                    no_wa: document.getElementById('f_no_wa').value.trim(),
+                    konsentrasi: document.getElementById('f_konsentrasi').value,
+                    tahun_akademik: text,
+                    semester_prefix: prefix,
+                    pembimbing_utama: document.getElementById('f_pembimbing_utama').value.trim(),
+                    pembimbing_pendamping: document.getElementById('f_pembimbing_pendamping').value.trim(),
+                    ketua_penguji: document.getElementById('f_ketua_penguji').value.trim(),
+                    anggota_penguji: document.getElementById('f_anggota_penguji').value.trim(),
+                    coverAbstrackFile: coverB64,
+                    fullFile: fullB64
+                };
+
+                // GAS tidak mendukung preflight OPTIONS → kirim sebagai text/plain
+                const res = await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify(payload)
+                });
+
+                let result;
+                try { result = await res.json(); }
+                catch { result = { status: 'error', message: 'Respons server tidak valid.' }; }
+
+                hideLoading();
+
+                if (result.status === 'success') {
+                    showToast(`✅ ${currentType === 'skripsi' ? 'Skripsi' : 'Tesis'} berhasil disimpan!`, 'success');
+                    setTimeout(() => resetAll(), 1800);
+                } else {
+                    showToast(`❌ Gagal: ${result.message}`, 'error');
+                }
+
+            } catch (err) {
+                hideLoading();
+                console.error(err);
+                showToast('⚠️ Gagal koneksi ke server. Periksa URL Apps Script.', 'error');
+            }
+        }
+
+        // ── File → base64 ──────────────────────────────────────────
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result.split(',')[1]);
+                reader.onerror = () => reject(new Error('Gagal membaca file'));
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // ══════════════════════════════════════════════════════════════
+        //  UI HELPERS
+        // ══════════════════════════════════════════════════════════════
+        let toastTimer;
+        function showToast(msg, type = 'info') {
+            const el = document.getElementById('toast');
+            el.textContent = msg;
+            el.className = `t-${type} show`;
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => { el.classList.remove('show'); }, 4000);
+        }
+
+        function showLoading(msg, detail) {
+            document.getElementById('loadingMsg').textContent = msg || 'Memproses...';
+            document.getElementById('loadingDetail').textContent = detail || '';
+            document.getElementById('loadingOverlay').classList.add('show');
+        }
+        function setLoadingMsg(msg, detail) {
+            document.getElementById('loadingMsg').textContent = msg;
+            document.getElementById('loadingDetail').textContent = detail || '';
+        }
+        function hideLoading() {
+            document.getElementById('loadingOverlay').classList.remove('show');
+        }
+
+        // Guard
+        if (APPS_SCRIPT_URL.includes('PASTE_YOUR')) {
+            console.warn('⚠️ Ganti APPS_SCRIPT_URL dengan URL web app yang sudah dideploy!');
+        }
+    </script>
 </body>
+
 </html>
