@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>SIM Akademik | Skripsi & Tesis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body { background: linear-gradient(135deg, #f0f4fa 0%, #e6edf4 100%); min-height: 100vh; }
+        .card-glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(2px); border-radius: 2rem; box-shadow: 0 20px 35px -12px rgba(0,0,0,0.15); }
+        .input-custom, select { transition: all 0.2s ease; border: 1px solid #e2e8f0; background-color: #fefefe; }
+        .input-custom:focus, select:focus { border-color: #3b82f6; outline: none; box-shadow: 0 0 0 3px rgba(59,130,246,0.2); }
+        .btn-primary { background: linear-gradient(100deg, #1e3a8a, #2563eb); transition: all 0.2s; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 20px -12px #1e3a8a; }
+        .nav-tab-active { background: #1e3a8a; color: white; border-bottom: 3px solid #facc15; }
+        .nav-tab-inactive { background: #f1f5f9; color: #1e293b; }
+        .file-label { background-color: #f8fafc; border: 1px dashed #94a3b8; border-radius: 1rem; cursor: pointer; transition: all 0.2s; }
+        .file-label:hover { background-color: #eef2ff; border-color: #3b82f6; }
+        .preview-pdf { height: 180px; border-radius: 12px; border: 1px solid #ddd; background: #fef9e3; overflow: hidden; cursor: pointer; transition: all 0.2s; }
+        .preview-pdf:hover { border-color: #3b82f6; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        @media (max-width: 640px) { .preview-pdf { height: 140px; } }
+    </style>
+</head>
+<body class="p-4 md:p-8 font-sans antialiased">
+
+<div class="max-w-5xl mx-auto">
+    <div class="text-center mb-8">
+        <h1 class="text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-blue-900 to-blue-600 bg-clip-text text-transparent">📘 MAGISTER & SARJANA</h1>
+        <p class="text-gray-600 mt-2">Sistem Pengumpulan Naskah Skripsi / Tesis <i class="fas fa-cloud-upload-alt text-blue-500"></i></p>
+    </div>
+
+    <!-- MENU -->
+    <div class="flex flex-wrap gap-3 justify-center mb-8">
+        <button id="menuSkripsiBtn" class="nav-tab-active px-8 py-3 rounded-full font-semibold text-base shadow-md transition-all flex items-center gap-2"><i class="fas fa-book-open"></i> Skripsi (S1)</button>
+        <button id="menuTesisBtn" class="nav-tab-inactive px-8 py-3 rounded-full font-semibold text-sm shadow-sm transition-all flex items-center gap-2"><i class="fas fa-graduation-cap"></i> Tesis (S2)</button>
+    </div>
+
+    <!-- FORM SKRIPSI -->
+    <div id="formSkripsiContainer" class="card-glass p-5 md:p-8 transition-all duration-300">
+        <div class="border-l-4 border-blue-600 pl-4 mb-6"><h2 class="text-2xl font-bold text-gray-800"><i class="fas fa-file-alt text-blue-600 mr-2"></i>Form Pengumpulan Skripsi</h2><p class="text-gray-500 text-sm">* wajib diisi</p></div>
+        <form id="skripsiForm" enctype="multipart/form-data">
+            <input type="hidden" name="type" value="skripsi">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div><label class="font-semibold">Nama Lengkap <span class="text-red-500">*</span></label><input type="text" name="nama" class="input-custom w-full p-3 rounded-xl" required></div>
+                <div><label class="font-semibold">NIM <span class="text-red-500">*</span></label><input type="text" name="nim" id="nimSkripsi" class="input-custom w-full p-3 rounded-xl" placeholder="202241001" required><div id="nimSkripsiError" class="error-message text-red-500 text-xs mt-1 hidden"><i class="fas fa-exclamation-circle"></i> <span></span></div></div>
+                <div><label class="font-semibold">No. WhatsApp <span class="text-red-500">*</span></label><input type="tel" name="no_wa" class="input-custom w-full p-3 rounded-xl" required></div>
+                <div><label class="font-semibold">Konsentrasi <span class="text-red-500">*</span></label><select name="konsentrasi" class="w-full p-3 rounded-xl" required><option value="">Pilih</option><option>Digital Public Relations</option><option>Digital Advertising</option><option>Digital Media Journalism</option><option>Digital Broadcasting</option></select></div>
+                <div><label class="font-semibold">Tahun Akademik</label><input type="text" name="tahun_akademik" id="tahunAkademikSkripsi" class="input-custom w-full p-3 rounded-xl bg-gray-100" readonly></div>
+                <div><label class="font-semibold">Pembimbing Utama <span class="text-red-500">*</span></label><input type="text" name="pembimbing_utama" class="input-custom w-full p-3 rounded-xl" required></div>
+                <div><label class="font-semibold">Pembimbing Pendamping</label><input type="text" name="pembimbing_pendamping" class="input-custom w-full p-3 rounded-xl"></div>
+                <div><label class="font-semibold">Ketua Penguji <span class="text-red-500">*</span></label><input type="text" name="ketua_penguji" class="input-custom w-full p-3 rounded-xl" required></div>
+                <div><label class="font-semibold">Anggota Penguji</label><input type="text" name="anggota_penguji" class="input-custom w-full p-3 rounded-xl"></div>
+            </div>
+            <!-- File Persyaratan -->
+            <div class="mt-6 border-t pt-5">
+                <label class="block font-semibold mb-2"><i class="fas fa-file-pdf text-red-500 mr-1"></i> File Persyaratan (Cover–Abstrak) PDF <span class="text-red-500">*</span></label>
+                <div class="file-label w-full p-3 text-center rounded-2xl" onclick="document.getElementById('skripsiCoverFile').click()">
+                    <i class="fas fa-cloud-upload-alt text-2xl text-blue-500"></i>
+                    <p class="text-sm">Klik untuk unggah</p>
+                    <span id="skripsiCoverFileName" class="text-xs font-medium block">Belum ada file</span>
+                </div>
+                <input type="file" id="skripsiCoverFile" name="coverAbstrackFile" accept=".pdf" class="hidden" required>
+                <!-- Preview -->
+                <div class="mt-3"><label class="text-sm font-medium">Preview PDF Persyaratan:</label><div id="previewCoverSkripsi" class="preview-pdf w-full bg-gray-100 flex items-center justify-center text-gray-400"><i class="fas fa-eye text-3xl"></i> <span class="ml-2">Preview akan tampil setelah pilih file</span></div></div>
+            </div>
+            <!-- File Full Skripsi -->
+            <div class="mt-5">
+                <label class="block font-semibold mb-2"><i class="fas fa-file-pdf text-red-500 mr-1"></i> Upload SKRIPSI LENGKAP PDF <span class="text-red-500">*</span></label>
+                <div class="file-label w-full p-3 text-center rounded-2xl" onclick="document.getElementById('skripsiFullFile').click()">
+                    <i class="fas fa-upload text-2xl text-blue-500"></i><p class="text-sm">Klik untuk unggah naskah full</p><span id="skripsiFullFileName" class="text-xs font-medium block">Belum ada file</span>
+                </div>
+                <input type="file" id="skripsiFullFile" name="fullFile" accept=".pdf" class="hidden" required>
+                <div class="mt-3"><label class="text-sm font-medium">Preview PDF Lengkap:</label><div id="previewFullSkripsi" class="preview-pdf w-full bg-gray-100 flex items-center justify-center text-gray-400"><i class="fas fa-eye text-3xl"></i> <span class="ml-2">Preview akan tampil setelah pilih file</span></div></div>
+            </div>
+            <div class="mt-8 flex justify-end gap-3"><button type="reset" class="bg-gray-200 px-6 py-3 rounded-xl font-semibold"><i class="fas fa-undo-alt"></i> Reset</button><button type="submit" class="btn-primary text-white px-8 py-3 rounded-xl font-bold"><i class="fas fa-paper-plane"></i> Kirim Skripsi</button></div>
+        </form>
+    </div>
+
+    <!-- FORM TESIS (sama tapi dengan validasi NIM 03) -->
+    <div id="formTesisContainer" class="card-glass p-5 md:p-8 hidden">
+        <div class="border-l-4 border-purple-600 pl-4 mb-6"><h2 class="text-2xl font-bold text-gray-800"><i class="fas fa-scroll text-purple-600 mr-2"></i>Form Pengumpulan Tesis</h2><p class="text-gray-500 text-sm">* wajib diisi</p></div>
+        <form id="tesisForm" enctype="multipart/form-data">
+            <input type="hidden" name="type" value="tesis">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div><label class="font-semibold">Nama Lengkap <span class="text-red-500">*</span></label><input type="text" name="nama" class="input-custom w-full p-3 rounded-xl" required></div>
+                <div><label class="font-semibold">NIM <span class="text-red-500">*</span></label><input type="text" name="nim" id="nimTesis" class="input-custom w-full p-3 rounded-xl" placeholder="202203001" required><div id="nimTesisError" class="error-message text-red-500 text-xs mt-1 hidden"></div></div>
+                <div><label class="font-semibold">No. WhatsApp <span class="text-red-500">*</span></label><input type="tel" name="no_wa" class="input-custom w-full p-3 rounded-xl" required></div>
+                <div><label class="font-semibold">Konsentrasi <span class="text-red-500">*</span></label><select name="konsentrasi" class="w-full p-3 rounded-xl" required><option value="">Pilih</option><option>Digital Public Relations</option><option>Digital Advertising</option><option>Digital Media Journalism</option><option>Manajemen Media</option></select></div>
+                <div><label class="font-semibold">Tahun Akademik</label><input type="text" name="tahun_akademik" id="tahunAkademikTesis" class="input-custom w-full p-3 rounded-xl bg-gray-100" readonly></div>
+                <div><label class="font-semibold">Pembimbing Utama <span class="text-red-500">*</span></label><input type="text" name="pembimbing_utama" class="input-custom w-full p-3 rounded-xl" required></div>
+                <div><label class="font-semibold">Pembimbing Pendamping</label><input type="text" name="pembimbing_pendamping" class="input-custom w-full p-3 rounded-xl"></div>
+                <div><label class="font-semibold">Ketua Penguji <span class="text-red-500">*</span></label><input type="text" name="ketua_penguji" class="input-custom w-full p-3 rounded-xl" required></div>
+                <div><label class="font-semibold">Anggota Penguji</label><input type="text" name="anggota_penguji" class="input-custom w-full p-3 rounded-xl"></div>
+            </div>
+            <div class="mt-6 border-t pt-5">
+                <label class="block font-semibold mb-2"><i class="fas fa-file-pdf text-red-500 mr-1"></i> File Persyaratan (Cover–Abstrak) PDF <span class="text-red-500">*</span></label>
+                <div class="file-label w-full p-3 text-center rounded-2xl" onclick="document.getElementById('tesisCoverFile').click()"><i class="fas fa-cloud-upload-alt text-2xl text-purple-500"></i><p class="text-sm">Klik untuk unggah</p><span id="tesisCoverFileName" class="text-xs font-medium block">Belum ada file</span></div>
+                <input type="file" id="tesisCoverFile" name="coverAbstrackFile" accept=".pdf" class="hidden" required><div class="mt-3"><label class="text-sm font-medium">Preview PDF Persyaratan:</label><div id="previewCoverTesis" class="preview-pdf w-full bg-gray-100 flex items-center justify-center text-gray-400"><i class="fas fa-eye text-3xl"></i> <span class="ml-2">Preview akan tampil setelah pilih file</span></div></div>
+            </div>
+            <div class="mt-5">
+                <label class="block font-semibold mb-2"><i class="fas fa-file-pdf text-red-500 mr-1"></i> Upload TESIS LENGKAP PDF <span class="text-red-500">*</span></label>
+                <div class="file-label w-full p-3 text-center rounded-2xl" onclick="document.getElementById('tesisFullFile').click()"><i class="fas fa-upload text-2xl text-purple-500"></i><p class="text-sm">Klik untuk unggah naskah full</p><span id="tesisFullFileName" class="text-xs font-medium block">Belum ada file</span></div>
+                <input type="file" id="tesisFullFile" name="fullFile" accept=".pdf" class="hidden" required><div class="mt-3"><label class="text-sm font-medium">Preview PDF Lengkap:</label><div id="previewFullTesis" class="preview-pdf w-full bg-gray-100 flex items-center justify-center text-gray-400"><i class="fas fa-eye text-3xl"></i> <span class="ml-2">Preview akan tampil setelah pilih file</span></div></div>
+            </div>
+            <div class="mt-8 flex justify-end gap-3"><button type="reset" class="bg-gray-200 px-6 py-3 rounded-xl font-semibold"><i class="fas fa-undo-alt"></i> Reset</button><button type="submit" class="btn-primary text-white px-8 py-3 rounded-xl font-bold"><i class="fas fa-paper-plane"></i> Kirim Tesis</button></div>
+        </form>
+    </div>
+
+    <div id="toastMsg" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white px-6 py-3 rounded-full shadow-xl z-50 hidden"></div>
+</div>
+
+<script>
+    // semester & akademik
+    function getSemesterPrefix() {
+        const m = new Date().getMonth()+1;
+        const y = new Date().getFullYear();
+        if((m>=9 && m<=12) || (m>=1 && m<=2)) {
+            let tahunMulai = m>=9 ? y : y-1;
+            return { prefix: `${tahunMulai}1`, text: `${tahunMulai}/${tahunMulai+1} Ganjil` };
+        } else {
+            let tahunMulai = m>=3 ? y-1 : y-1;
+            return { prefix: `${tahunMulai+1}2`, text: `${tahunMulai}/${tahunMulai+1} Genap` };
+        }
+    }
+    function setTahunAkademik() {
+        const { text } = getSemesterPrefix();
+        document.getElementById('tahunAkademikSkripsi').value = text;
+        document.getElementById('tahunAkademikTesis').value = text;
+    }
+    setTahunAkademik();
+
+    // Validasi NIM
+    function validateNIM(nim, type) {
+        if(nim.length<9) return false;
+        let digits = nim.substring(4,6);
+        if(type==='skripsi') return digits==='41';
+        if(type==='tesis') return digits==='03';
+        return false;
+    }
+    function bindNIMValidation(inputId, errorDivId, type) {
+        let inp = document.getElementById(inputId);
+        let errDiv = document.getElementById(errorDivId);
+        inp.addEventListener('input', ()=>{
+            if(!validateNIM(inp.value, type) && inp.value.length>0) {
+                errDiv.classList.remove('hidden');
+                errDiv.querySelector('span').innerText = `NIM tidak valid! ${type==='skripsi'?'Digit ke-5 dan 6 harus "41" (contoh:202241001)':'Digit ke-5 dan 6 harus "03" (contoh:202203001)'}`;
+            } else errDiv.classList.add('hidden');
+        });
+    }
+    bindNIMValidation('nimSkripsi','nimSkripsiError','skripsi');
+    bindNIMValidation('nimTesis','nimTesisError','tesis');
+
+    // Preview PDF
+    function setupPreview(fileInputId, previewDivId) {
+        let input = document.getElementById(fileInputId);
+        let previewDiv = document.getElementById(previewDivId);
+        input.addEventListener('change', (e) => {
+            let file = e.target.files[0];
+            if(file && file.type==='application/pdf') {
+                let url = URL.createObjectURL(file);
+                previewDiv.innerHTML = `<iframe src="${url}" width="100%" height="100%" class="w-full h-full border-0"></iframe>`;
+                URL.revokeObjectURL(url);
+            } else {
+                previewDiv.innerHTML = `<div class="flex items-center justify-center w-full h-full text-gray-400"><i class="fas fa-eye text-3xl"></i><span class="ml-2">Preview PDF tidak tersedia</span></div>`;
+            }
+        });
+    }
+    setupPreview('skripsiCoverFile','previewCoverSkripsi');
+    setupPreview('skripsiFullFile','previewFullSkripsi');
+    setupPreview('tesisCoverFile','previewCoverTesis');
+    setupPreview('tesisFullFile','previewFullTesis');
+
+    // File name display
+    ['skripsiCoverFile','skripsiFullFile','tesisCoverFile','tesisFullFile'].forEach(id => {
+        let input = document.getElementById(id);
+        let spanId = id.replace('File','FileName');
+        let span = document.getElementById(spanId);
+        input.addEventListener('change', ()=> span.innerText = input.files[0] ? input.files[0].name : 'Belum ada file');
+    });
+
+    // Menu Switch
+    const menuSkripsi = document.getElementById('menuSkripsiBtn');
+    const menuTesis = document.getElementById('menuTesisBtn');
+    const contSkripsi = document.getElementById('formSkripsiContainer');
+    const contTesis = document.getElementById('formTesisContainer');
+    menuSkripsi.addEventListener('click',()=>{
+        menuSkripsi.classList.add('nav-tab-active'); menuSkripsi.classList.remove('nav-tab-inactive');
+        menuTesis.classList.add('nav-tab-inactive'); menuTesis.classList.remove('nav-tab-active');
+        contSkripsi.classList.remove('hidden'); contTesis.classList.add('hidden');
+    });
+    menuTesis.addEventListener('click',()=>{
+        menuTesis.classList.add('nav-tab-active'); menuTesis.classList.remove('nav-tab-inactive');
+        menuSkripsi.classList.add('nav-tab-inactive'); menuSkripsi.classList.remove('nav-tab-active');
+        contTesis.classList.remove('hidden'); contSkripsi.classList.add('hidden');
+    });
+
+    // SUBMIT ke Apps Script
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwGjsov1katESduyyvpwaqci15tkhIQdwbF-9arc6vSd5pT84-PAAKx08BKgrg26FFF/exec"; // GANTI!
+    async function submitForm(form, event) {
+        event.preventDefault();
+        let formData = new FormData(form);
+        let nim = formData.get('nim');
+        let type = formData.get('type');
+        if(!validateNIM(nim, type)) { showToast(`❌ NIM tidak valid untuk ${type}`, "error"); return; }
+        let cover = formData.get('coverAbstrackFile');
+        let full = formData.get('fullFile');
+        if(!cover || cover.size===0) { showToast("Harap upload file persyaratan", "error"); return; }
+        if(!full || full.size===0) { showToast("Harap upload naskah lengkap", "error"); return; }
+        let { prefix, text } = getSemesterPrefix();
+        formData.append('semester_prefix', prefix);
+        formData.append('tahun_akademik', text);
+        showToast("⏳ Mengirim data...", "info");
+        try {
+            let res = await fetch(APPS_SCRIPT_URL, { method: 'POST', body: formData });
+            let result = await res.json();
+            if(result.status==='success') { showToast(`✅ ${type.toUpperCase()} berhasil disimpan!`, "success"); form.reset(); location.reload(); }
+            else showToast(`❌ Gagal: ${result.message}`, "error");
+        } catch(err) { showToast("⚠️ Gagal koneksi ke server. Periksa URL Apps Script.", "error"); }
+    }
+    function showToast(msg, type) {
+        let toast = document.getElementById('toastMsg');
+        toast.innerHTML = `<i class="fas ${type==='success'?'fa-check-circle':type==='error'?'fa-exclamation-triangle':'fa-spinner fa-pulse'}"></i> ${msg}`;
+        toast.classList.remove('hidden');
+        setTimeout(()=>toast.classList.add('hidden'), 4000);
+    }
+    document.getElementById('skripsiForm').addEventListener('submit', e=>submitForm(e.target, e));
+    document.getElementById('tesisForm').addEventListener('submit', e=>submitForm(e.target, e));
+    if(APPS_SCRIPT_URL.includes("PASTE_YOUR")) alert("⚠️ GANTI APPS_SCRIPT_URL dengan URL web app yang sudah dideploy!");
+</script>
+</body>
+</html>
