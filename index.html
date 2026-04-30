@@ -1124,6 +1124,7 @@
             populateKonsentrasi('skripsi');
             bindFileInputs();
             bindNIMInput();
+            bindWaInput();
         })();
 
         // ── Semester / Tahun Akademik ──────────────────────────────
@@ -1208,6 +1209,13 @@
             });
         }
 
+        function bindWaInput() {
+            document.getElementById('f_no_wa').addEventListener('input', function () {
+                // Allow numbers only
+                this.value = this.value.replace(/\D/g, '');
+            });
+        }
+
         function validateNIMField() {
             const nim = document.getElementById('f_nim').value.trim();
             const fb = document.getElementById('nimFeedback');
@@ -1227,6 +1235,10 @@
             if (!/^\d+$/.test(nim)) return { ok: false, msg: 'NIM hanya boleh berisi angka.' };
             if (nim.length < 9) return { ok: false, msg: `NIM harus 9 digit. Saat ini ${nim.length} digit.` };
             if (nim.length > 9) return { ok: false, msg: 'NIM tidak boleh lebih dari 9 digit.' };
+
+            const thnMasuk = parseInt(nim.substring(0, 4), 10);
+            const currentYear = new Date().getFullYear();
+            if (thnMasuk > currentYear) return { ok: false, msg: `Tahun angkatan (${thnMasuk}) tidak boleh melebihi tahun saat ini (${currentYear}).` };
 
             // Digit 7-8-9 (index 6,7,8) — karena total 9, ini otomatis 3 digit ✓
             const kode = nim.substring(4, 6);
