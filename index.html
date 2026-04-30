@@ -1210,9 +1210,11 @@
         }
 
         function bindWaInput() {
-            document.getElementById('f_no_wa').addEventListener('input', function () {
-                // Allow numbers only
-                this.value = this.value.replace(/\D/g, '');
+            const waInput = document.getElementById('f_no_wa');
+            waInput.maxLength = 15; // Disesuaikan untuk format 628
+            waInput.addEventListener('input', function () {
+                // Allow numbers only, max 15 digits
+                this.value = this.value.replace(/\D/g, '').slice(0, 15);
             });
         }
 
@@ -1368,6 +1370,9 @@
                 if (!ok) { showToast('❌ ' + msg, 'error'); shake('f_nim'); return false; }
 
                 if (!noWa) { showToast('⚠️ No. WhatsApp wajib diisi', 'error'); shake('f_no_wa'); return false; }
+                if (noWa.length < 10 || noWa.length > 15) { showToast('⚠️ No. WhatsApp harus 10-15 digit', 'error'); shake('f_no_wa'); return false; }
+                if (!/^(08|628)[1-9]/.test(noWa)) { showToast('⚠️ Format No. WA tidak valid (harus diawali 08 atau 628)', 'error'); shake('f_no_wa'); return false; }
+
                 if (!konsen) { showToast('⚠️ Pilih konsentrasi terlebih dahulu', 'error'); shake('f_konsentrasi'); return false; }
             }
 
